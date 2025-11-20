@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -13,16 +12,16 @@
             <Font size="25.0" />
          </font>
       </Label>
-      <Label layoutX="71.0" layoutY="121.0" text="Movie Name:" />
+      <Label layoutX="71.0" layoutY="121.0" text="Title:" />
       <Label layoutX="71.0" layoutY="173.0" text="Genre:" />
       <Label layoutX="71.0" layoutY="225.0" text="Showtime:" />
       <Label layoutX="70.0" layoutY="278.0" text="Room No.:" />
       <Label layoutX="67.0" layoutY="330.0" text="Ticket Price:" />
-      <TextField fx:id="aNameDetailsTextField" layoutX="244.0" layoutY="117.0" />
-      <TextField fx:id="aGenreDetailsTextField" layoutX="244.0" layoutY="169.0" />
-      <TextField fx:id="aShowtimeDetailsTextField" layoutX="244.0" layoutY="221.0" />
-      <TextField fx:id="aRoomDetailsTextField" layoutX="244.0" layoutY="274.0" />
       <Button layoutX="215.0" layoutY="402.0" mnemonicParsing="false" onAction="#onCloseButtonDetails" text="Close" />
-      <TextField fx:id="aTicketPriceDetailsTextField" layoutX="244.0" layoutY="326.0" />
+      <Label fx:id="aTitleDetailLabel" layoutX="243.0" layoutY="116.0" prefHeight="26.0" prefWidth="150.0" style="-fx-border-color: black;" />
+      <Label fx:id="aShowtimeDetailLabel" layoutX="243.0" layoutY="220.0" prefHeight="26.0" prefWidth="150.0" style="-fx-border-color: black;" />
+      <Label fx:id="aGenreDetailLabel" layoutX="243.0" layoutY="168.0" prefHeight="26.0" prefWidth="150.0" style="-fx-border-color: black;" />
+      <Label fx:id="aRoomDetailLabel" layoutX="243.0" layoutY="273.0" prefHeight="26.0" prefWidth="150.0" style="-fx-border-color: black;" />
+      <Label fx:id="aTicketPriceDetailLabel" layoutX="243.0" layoutY="325.0" prefHeight="26.0" prefWidth="150.0" style="-fx-border-color: black;" />
    </children>
 </AnchorPane>
