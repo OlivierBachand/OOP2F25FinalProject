@@ -1,4 +1,4 @@
-package com.example.oop2f25finalproject;
+package com.example.oop2f25finalproject.Model;
 
 /**
  * Represents a user in the movie ticket booking system.
