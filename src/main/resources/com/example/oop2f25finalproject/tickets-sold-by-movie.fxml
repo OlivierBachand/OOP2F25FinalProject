@@ -8,17 +8,22 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="475.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="100.0" layoutY="99.0" text="MOVIE TITLE:">
+      <Label layoutX="96.0" layoutY="117.0" text="MOVIE TITLE:">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="276.0" layoutY="99.0" text="NO. OF TICKETS SOLD">
+      <Label layoutX="276.0" layoutY="117.0" text="NO. OF TICKETS SOLD">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <ListView fx:id="aMovieTicketsSoldListView" layoutX="38.0" layoutY="138.0" prefHeight="200.0" prefWidth="400.0" />
+      <ListView fx:id="aMovieTicketsSoldListView" layoutX="38.0" layoutY="153.0" prefHeight="200.0" prefWidth="400.0" />
       <Button fx:id="onMovieCloseButton" layoutX="212.0" layoutY="386.0" mnemonicParsing="false" text="Close" />
+      <Label layoutX="172.0" layoutY="45.0" text="Consult Ticket Sales">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
