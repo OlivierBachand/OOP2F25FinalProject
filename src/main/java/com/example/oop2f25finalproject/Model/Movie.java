@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Represents a movie with a title, genre, length, and associated showtimes.
+ * @author Olivier bachand
  */
 public class Movie {
 

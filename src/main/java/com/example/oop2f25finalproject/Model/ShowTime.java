@@ -8,6 +8,7 @@ import java.util.List;
 /**
  * Represents a scheduled movie showtime, including the date/time,
  * the room where it plays, and the tickets associated with it.
+ * @author Olivier bachand
  */
 public class ShowTime {
 
