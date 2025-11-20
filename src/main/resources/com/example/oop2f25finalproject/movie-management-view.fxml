@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="447.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oop2f25finalproject.MovieManagementView">
+<AnchorPane prefHeight="475.0" prefWidth="475.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oop2f25finalproject.MovieManagementView">
    <children>
-      <GridPane layoutX="50.0" layoutY="84.0" prefHeight="232.0" prefWidth="347.0">
+      <GridPane layoutX="67.0" layoutY="86.0" prefHeight="334.0" prefWidth="347.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -41,12 +41,12 @@
                </GridPane.margin></Button>
          </children>
       </GridPane>
-      <Label layoutX="163.0" layoutY="36.0" text="Manager View">
+      <Label layoutX="180.0" layoutY="38.0" text="Manager View">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button layoutX="375.0" layoutY="24.0" mnemonicParsing="false" text="Close" />
-      <Button layoutX="22.0" layoutY="24.0" mnemonicParsing="false" text="Log out" />
+      <Button layoutX="392.0" layoutY="26.0" mnemonicParsing="false" text="Close" />
+      <Button layoutX="39.0" layoutY="26.0" mnemonicParsing="false" text="Log out" />
    </children>
 </AnchorPane>
