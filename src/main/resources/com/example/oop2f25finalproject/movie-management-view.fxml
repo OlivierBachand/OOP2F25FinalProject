@@ -46,5 +46,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
+      <Button layoutX="375.0" layoutY="24.0" mnemonicParsing="false" text="Close" />
+      <Button layoutX="22.0" layoutY="24.0" mnemonicParsing="false" text="Log out" />
    </children>
 </AnchorPane>
