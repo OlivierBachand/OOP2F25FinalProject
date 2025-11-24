@@ -74,7 +74,7 @@ public class LoginController {
 
     @FXML
     public void onCreateAccountButtonClick() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(""));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("signup-view.fxml"));
         Parent root = fxmlLoader.load();
 
         Stage stage = (Stage) createAccountButton.getScene().getWindow();
