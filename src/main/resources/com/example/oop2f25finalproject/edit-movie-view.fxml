@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="475.0" prefWidth="475.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oop2f25finalproject.AddMovieView">
+   <children>
+      <ListView fx:id="aShowTimeListView" layoutX="33.0" layoutY="88.0" prefHeight="246.0" prefWidth="211.0" />
+      <Label layoutX="190.0" layoutY="33.0" text="Add Movie">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Button layoutX="40.0" layoutY="347.0" mnemonicParsing="false" onAction="#onAddShowTimeButtonClick" prefWidth="55.0" text="Add" />
+      <Button layoutX="111.0" layoutY="347.0" mnemonicParsing="false" onAction="#onEditButtonClick" prefWidth="55.0" text="Edit" />
+      <Button layoutX="181.0" layoutY="347.0" mnemonicParsing="false" onAction="#onDeleteButtonClick" prefWidth="55.0" text="Delete" />
+      <Button layoutX="151.0" layoutY="416.0" mnemonicParsing="false" onAction="#onAddMovieButtonClick" prefWidth="60.0" text="Add" />
+      <Button layoutX="275.0" layoutY="416.0" mnemonicParsing="false" onAction="#onCancelButtonClick" prefWidth="60.0" text="Cancel" />
+      <TextField layoutX="291.0" layoutY="120.0" promptText="Enter the title..." />
+      <TextField layoutX="291.0" layoutY="206.0" promptText="Enter the genre..." />
+      <TextField layoutX="291.0" layoutY="298.0" prefHeight="25.0" prefWidth="149.0" promptText="Enter the length..." />
+      <Label layoutX="289.0" layoutY="100.0" text="Title:" />
+      <Label layoutX="291.0" layoutY="189.0" text="Genre:" />
+      <Label layoutX="291.0" layoutY="281.0" text="Length (HH:mm:ss):" />
+      <Label layoutX="102.0" layoutY="69.0" text="Show Times">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
