@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class Room {
     /** A static collection maintaining all Room instances created. */
-    public static List<Room> aRoomList;
+    public static List<Room> roomList;
 
     /** Maximum number of people the room can accommodate. */
     private int aCapacity;
@@ -34,7 +34,7 @@ public class Room {
     public Room(int pCapacity, String pName) {
         this.setCapacity(pCapacity);
         this.setName(pName);
-        Room.aRoomList = new ArrayList<>();
+        Room.roomList = new ArrayList<>();
         Room.addRoom(this);
     }
 
@@ -50,7 +50,7 @@ public class Room {
     public Room(String pCapacity, String pName) {
         this.setCapacity(pCapacity);
         this.setName(pName);
-        Room.aRoomList = new ArrayList<>();
+        Room.roomList = new ArrayList<>();
         Room.addRoom(this);
     }
 
@@ -62,7 +62,7 @@ public class Room {
      * @throws IndexOutOfBoundsException if the index is invalid.
      */
     public static Room getRoom(int pIndex) {
-        return aRoomList.get(pIndex);
+        return roomList.get(pIndex);
     }
 
     /**
@@ -75,7 +75,7 @@ public class Room {
         if (pRoom == null) {
             throw new NullPointerException("Room is null");
         }
-        aRoomList.add(pRoom);
+        roomList.add(pRoom);
     }
 
     /**
@@ -85,7 +85,7 @@ public class Room {
      * @throws IndexOutOfBoundsException if the index is invalid.
      */
     public static void removeRoom(int pIndex) {
-        aRoomList.remove(pIndex);
+        roomList.remove(pIndex);
     }
 
     /**
