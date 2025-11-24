@@ -47,9 +47,8 @@ public class SignupController {
      * Constructor for the controller.
      * Passes in the shared Login instance to the Signup model.
      */
-    public SignupController() {
-        // check the login instance used in loginController. it should be the same
-        this.aSignup = new Signup(Login.getInstance());
+    public SignupController(Login pLogin) {
+        this.aSignup = new Signup(pLogin);
     }
 
     /**
@@ -68,8 +67,8 @@ public class SignupController {
      */
     @FXML
     public void onSignupButtonClick() {
-        String name = nameTextField.getText();
-        String email = emailTextField.getText();
+        String name = nameTextField.getText().trim();
+        String email = emailTextField.getText().trim();
         String password = passwordField.getText();
 
         try {
