@@ -19,7 +19,7 @@ public class ShowTime {
     private Room aRoom;
 
     /** The list of tickets sold or reserved for this showtime. */
-    private List<Ticket> aTickets = new ArrayList<>();
+    private final List<Ticket> aTickets = new ArrayList<>();
 
     /**
      * Constructs a ShowTime with a specific date/time and room.
