@@ -52,6 +52,7 @@
             <Insets bottom="15.0" left="15.0" right="15.0" />
          </VBox.margin>
       </PasswordField>
+      <PasswordField fx:id="confirmPasswordField" prefHeight="43.0" prefWidth="316.0" promptText="Confirm Password" />
       <Button fx:id="signupButton" alignment="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#onSignupButtonClick" prefHeight="43.0" prefWidth="316.0" text="Sign up" textAlignment="CENTER" textFill="WHITE">
          <VBox.margin>
             <Insets bottom="50.0" left="15.0" right="15.0" top="15.0" />
