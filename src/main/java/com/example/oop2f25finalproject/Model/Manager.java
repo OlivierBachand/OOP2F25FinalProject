@@ -1,7 +1,7 @@
 package com.example.oop2f25finalproject.Model;
 
 /**
- * Represents a manager in teh movie ticket booking system.
+ * Represents a manager in the movie ticket booking system.
  *
  * This class extends the {@link User} class and does not add additional fields
  * for now, but it can be expanded later to include manager-specific functionalities.
