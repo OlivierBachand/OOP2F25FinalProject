@@ -4,7 +4,6 @@ import java.util.List;
 
 /**
  * Handles sign-up logic for registering new clients.
- * Works with the Login model to store users.
  *
  * This class performs input validation, checks for duplicate emails,
  * and assigns unique client IDs.
@@ -19,9 +18,9 @@ public class Signup {
     private final Login aLogin;
 
     /**
-     * Creates a new Signup model with the given login instance.
+     * Constructs the new Signup model with the given login instance.
      *
-     * @param pLogin The login model instance to register the clients into
+     * @param pLogin The login instance
      */
     public Signup(Login pLogin) {
         this.aLogin = pLogin;
@@ -30,13 +29,14 @@ public class Signup {
     /**
      * Registers a new client with the given name, email, and password.
      *
-     * @param pName Client's full name
-     * @param pEmail Client's email address
-     * @param pPassword Client's password
-     * @return The newly created Client object
+     * @param pName             Client's name
+     * @param pEmail            Client's email address
+     * @param pPassword         Client's password
+     * @param pConfirmPassword  Password confirmation
+     * @return The newly registered Client
      * @throws IllegalArgumentException if validation fails or email already exists
      */
-    public Client registerClient(String pName, String pEmail, String pPassword) {
+    public Client registerClient(String pName, String pEmail, String pPassword, String pConfirmPassword) {
         // Trim input to remove leading/trailing spaces
         pName = pName.trim();
         pEmail = pEmail.trim();
@@ -51,6 +51,9 @@ public class Signup {
         if (pPassword.length() < 6) {
             throw new IllegalArgumentException("Password must be at least 6 characters");
         }
+        if (!pPassword.equals(pConfirmPassword)) {
+            throw new IllegalArgumentException("Passwords do not match");
+        }
 
         // Check if the email is already registered
         List<Client> existingClients = aLogin.getClients();
@@ -63,11 +66,9 @@ public class Signup {
         // Assign unique client ID
         int newClientID = existingClients.size() + 1;
 
-        // Create new client
+        // Create and register new client
         Client newClient = new Client(newClientID, pName, pEmail, pPassword);
-
-        // Add the client to Login model
-        aLogin.registerClient(newClient);
+        aLogin.addClient(newClient);
 
         return newClient;
     }
