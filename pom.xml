@@ -61,7 +61,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.example.oop2f25finalproject/com.example.oop2f25finalproject.HelloApplication
+                                com.example.oop2f25finalproject/com.example.oop2f25finalproject.MovieTheatreApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
