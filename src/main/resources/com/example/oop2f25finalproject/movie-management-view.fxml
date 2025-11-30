@@ -27,15 +27,15 @@
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin></Button>
-            <Button mnemonicParsing="false" onAction="#onManageMoviesButtonClick" text="Manage" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+            <Button mnemonicParsing="false" onAction="#onManageRoomsButtonClick" text="Manage" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin></Button>
-            <Button mnemonicParsing="false" onAction="#onViewSalesMovie" text="View" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+            <Button mnemonicParsing="false" onAction="#onViewSalesMovieButtonClick" text="View" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin></Button>
-            <Button mnemonicParsing="false" text="View" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+            <Button mnemonicParsing="false" onAction="#onViewSalesShowTimeButtonClick" text="View" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets left="20.0" />
                </GridPane.margin></Button>
@@ -46,7 +46,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button layoutX="392.0" layoutY="26.0" mnemonicParsing="false" text="Close" />
-      <Button layoutX="39.0" layoutY="26.0" mnemonicParsing="false" text="Log out" />
+      <Button layoutX="392.0" layoutY="26.0" mnemonicParsing="false" onAction="#onCloseButtonClick" text="Close" />
+      <Button fx:id="aLogOutButton" layoutX="39.0" layoutY="26.0" mnemonicParsing="false" onAction="#onLogOutButtonClick" text="Log out" />
    </children>
 </AnchorPane>
