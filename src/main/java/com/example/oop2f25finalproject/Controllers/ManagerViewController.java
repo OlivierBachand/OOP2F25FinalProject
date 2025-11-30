@@ -38,7 +38,7 @@ public class ManagerViewController {
 
     /**
      * Opens the movie management window.
-     * <p>This loads the <code>manager-movie-view.fxml</code> file and
+     * <p>This loads the <code>movie-management-view.fxml</code> file and
      * displays it in a modal stage.</p>
      *
      * @param pEvent the action event triggered by the button click
@@ -46,7 +46,7 @@ public class ManagerViewController {
      */
     @FXML
     private void onManageMoviesButtonClick(ActionEvent pEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MovieTheatreApplication.class.getResource("manager-movie-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MovieTheatreApplication.class.getResource("movie-management-view.fxml"));
         Parent view = fxmlLoader.load();
         MovieManagementController newView = fxmlLoader.getController();
         Scene nextScene = new Scene(view, 475, 475);

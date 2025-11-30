@@ -72,10 +72,10 @@ public class Movie {
     /**
      * Removes the specified movie from the global movie list.
      *
-     * @param pMovie the movie to remove
+     * @param pIndex the index of the movie to remove
      */
-    public static void removeMovie(Movie pMovie) {
-        Movie.movieList.remove(pMovie);
+    public static void removeMovie(int pIndex) {
+        Movie.movieList.remove(pIndex);
     }
 
     /**
@@ -143,5 +143,10 @@ public class Movie {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         Date date = sdf.parse(pLength);
         aLength = new Time(date.getTime());
+    }
+
+    @Override
+    public String toString() {
+        return this.aTitle + "\t\t" + this.aGenre + "\t\t" + this.aLength;
     }
 }
