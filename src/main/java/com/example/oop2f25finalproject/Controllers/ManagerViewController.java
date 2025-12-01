@@ -48,7 +48,7 @@ public class ManagerViewController {
     private void onManageMoviesButtonClick(ActionEvent pEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MovieTheatreApplication.class.getResource("movie-management-view.fxml"));
         Parent view = fxmlLoader.load();
-        MovieManagementController newView = fxmlLoader.getController();
+        MovieManagementViewController newView = fxmlLoader.getController();
         Scene nextScene = new Scene(view, 475, 475);
         Stage nextStage = new Stage();
         nextStage.setScene(nextScene);
