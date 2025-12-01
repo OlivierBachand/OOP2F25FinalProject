@@ -66,7 +66,7 @@ public class LoginController {
      * Handles the login button click event.
      *
      * Reads and trims user input.
-     * Validates input is not empty.
+     * Validates input.
      * Authenticates user using the login model
      * Redirects to the appropriate dashboard based on the user role.
      *
@@ -80,6 +80,7 @@ public class LoginController {
         // Validate input
         if(email.isEmpty() || password.isEmpty()) {
             errorMessageLabel.setText("Email and Password cannot be empty");
+            return;
         }
 
         // Authenticate using the login model
@@ -87,6 +88,7 @@ public class LoginController {
 
         if (loggedInUser == null) {
             errorMessageLabel.setText("Invalid email or password");
+            return;
         }
 
         try {
@@ -95,8 +97,7 @@ public class LoginController {
             FXMLLoader fxmlLoader;
 
             if (loggedInUser instanceof Manager) {
-                // Manager fxml view to be added
-                fxmlLoader = new FXMLLoader(getClass().getResource(""));
+                fxmlLoader = new FXMLLoader(getClass().getResource("manager-view.fxml"));
             } else {
                 fxmlLoader = new FXMLLoader(getClass().getResource("client-view.fxml"));
             }
@@ -113,7 +114,7 @@ public class LoginController {
     }
 
     /**
-     * Handles the create account button clilck.
+     * Handles the create account button click.
      * Navigates to the sign-up page, passing the shared login instance to the SignupController.
      *
      * @throws IOException If the sign-up FXML cannot be loaded
