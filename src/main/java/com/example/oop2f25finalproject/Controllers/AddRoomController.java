@@ -1,6 +1,5 @@
 package com.example.oop2f25finalproject.Controllers;
 
-import com.example.oop2f25finalproject.Model.AddRoom;
 import com.example.oop2f25finalproject.Model.Room;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,7 +11,6 @@ import javafx.stage.Stage;
 /**
  * Controller for the Add Room view.
  * Handles user input for creating a new Room.
- * It uses the AddRoom model for validation and creation.
  *
  * @author Rohina
  */
@@ -37,20 +35,6 @@ public class AddRoomController {
     public Button cancelButton;
 
     /**
-     * The model handling the creation of rooms.
-     */
-    private final AddRoom aAddRoomModel;
-
-    /**
-     * Constructor that receives the shared AddRoom model.
-     *
-     * @param pAddRoomModel The AddRoom model
-     */
-    public AddRoomController(AddRoom pAddRoomModel) {
-        this.aAddRoomModel = pAddRoomModel;
-    }
-
-    /**
      * Initializes the controller.
      * Clears messageLabel text.
      */
@@ -71,12 +55,12 @@ public class AddRoomController {
         String capacity = roomCapacityTextField.getText().trim();
 
         try {
-            Room newRoom = aAddRoomModel.addRoom(name, capacity);
+            new Room(capacity, name);
 
             messageLabel.setStyle("-fx-text-fill: green;");
             messageLabel.setText("Room added successfully!");
 
-            // Clear input fields
+            // Clear input fields after successfully adding room
             roomNameTextField.clear();
             roomCapacityTextField.clear();
 

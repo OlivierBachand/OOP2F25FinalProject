@@ -142,7 +142,16 @@ public class Room {
      */
     public void setName(String pName) {
         if (pName == null || pName.trim().isEmpty())
-            throw new IllegalArgumentException("Name cannot empty");
+            throw new IllegalArgumentException("Name cannot be empty");
+
+        // Check if roomList exists then check for duplicate room name
+        if (roomList != null) {
+            for (Room room : roomList) {
+                if (room.getName().equalsIgnoreCase(pName.trim())) {
+                    throw new IllegalArgumentException("Room name already exists");
+                }
+            }
+        }
         this.aName = pName.trim();
     }
 }
