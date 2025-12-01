@@ -79,6 +79,53 @@ public class Movie {
     }
 
     /**
+     * Returns a list of showtimes for this movie as formatted strings.
+     * Each entry represents a ShowTime object's string representation.
+     *
+     * @return a list of showtime descriptions
+     */
+    public ShowTime getShowTime(int pIndex) {
+        return this.aShowTimes.get(pIndex);
+    }
+
+    public int getShowTimesSize() {
+        return this.aShowTimes.size();
+    }
+
+    /**
+     * Removes a specific showtime from this movie based on its index in the list.
+     * <p>
+     * This method is typically used when a scheduled showtime needs to be cancelled
+     * or modified. If the index is valid, the corresponding {@code ShowTime}
+     * object is removed from the movie's internal list of showtimes.
+     * </p>
+     *
+     * @param pIndex the position of the showtime to remove in the list
+     * @throws IndexOutOfBoundsException if the index does not exist in the list,
+     *                                   ensuring that accidental invalid removals are caught
+     */
+    public void deleteShowTime(int pIndex) {
+        this.aShowTimes.remove(pIndex);
+    }
+
+    /**
+     * Adds a new showtime to this movie's list of scheduled showtimes.
+     * <p>
+     * This method is used when creating a new showtime for a movie,
+     * allowing the system to track when and where the movie will be shown.
+     * The method does not perform duplicate checks, so it assumes that the caller
+     * ensures the provided {@code ShowTime} is valid and appropriate for the schedule.
+     * </p>
+     *
+     * @param pShowTime the showtime to associate with this movie
+     * @throws NullPointerException if the provided showtime is {@code null},
+     *                              preventing insertion of invalid data
+     */
+    public void addShowTime(ShowTime pShowTime) {
+        this.aShowTimes.add(pShowTime);
+    }
+
+    /**
      * Returns the genre of the movie.
      *
      * @return the movie's genre
@@ -102,7 +149,7 @@ public class Movie {
      * @return the movie's length as a {@link Time} object
      */
     public Time getLength() {
-        return aLength;
+        return this.aLength;
     }
 
     /**
@@ -145,6 +192,13 @@ public class Movie {
         aLength = new Time(date.getTime());
     }
 
+    /**
+     * Returns a formatted string representation of the movie,
+     * including its title, genre, and length. Fields are separated
+     * with tabs for aligned display in lists or tables.
+     *
+     * @return a string containing the movie's title, genre, and length
+     */
     @Override
     public String toString() {
         return this.aTitle + "\t\t" + this.aGenre + "\t\t" + this.aLength;
