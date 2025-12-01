@@ -2,6 +2,7 @@ package com.example.oop2f25finalproject.Controllers;
 
 import com.example.oop2f25finalproject.Model.Client;
 import com.example.oop2f25finalproject.Model.Signup;
+import com.example.oop2f25finalproject.Model.Login;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -34,6 +35,9 @@ public class SignupController {
 
     @FXML
     public PasswordField passwordField;
+
+    @FXML
+    public PasswordField confirmPasswordField;
 
     @FXML
     public Button signupButton;
@@ -70,10 +74,17 @@ public class SignupController {
         String name = nameTextField.getText().trim();
         String email = emailTextField.getText().trim();
         String password = passwordField.getText();
+        String confirmPassword = confirmPasswordField.getText();
+
+        // Validate passwords match
+        if (!password.equals(confirmPassword)) {
+            errorMessageLabel.setText("Passwords do not match");
+            return;
+        }
 
         try {
             // Register the client
-            Client newClient = aSignup.registerClient(name, email, password);
+            Client newClient = aSignup.registerClient(name, email, password, confirmPassword);
 
             // Redirect to the Client Dashboard
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("client-view.fxml"));
@@ -89,8 +100,8 @@ public class SignupController {
             // Show validation errors in the errorMessage label
             errorMessageLabel.setText(e.getMessage());
         } catch (IOException e) {
-            e.printStackTrace();
-            errorMessageLabel.setText("Failed to load Dashboard");
+            errorMessageLabel.setText("Failed to load Dashboard. Please refresh the page.");
+            System.err.println("IOException while loading Dashboard: " + e.getMessage());
         }
     }
 }
