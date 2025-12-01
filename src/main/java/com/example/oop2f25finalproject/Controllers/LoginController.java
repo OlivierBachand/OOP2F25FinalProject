@@ -109,7 +109,8 @@ public class LoginController {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            errorMessageLabel.setText("Failed to load Dashboard");
+            errorMessageLabel.setText("Failed to load Dashboard. Please refresh the page.");
+            System.err.println("IOException while loading Dashboard: " + e.getMessage());
         }
     }
 
