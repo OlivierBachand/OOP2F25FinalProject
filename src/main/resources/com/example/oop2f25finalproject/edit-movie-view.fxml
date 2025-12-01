@@ -4,22 +4,22 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="475.0" prefWidth="475.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oop2f25finalproject.AddMovieView">
+<AnchorPane prefHeight="475.0" prefWidth="475.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oop2f25finalproject.Controllers.EditMovieViewController">
    <children>
       <ListView fx:id="aShowTimeListView" layoutX="33.0" layoutY="88.0" prefHeight="246.0" prefWidth="211.0" />
-      <Label layoutX="190.0" layoutY="33.0" text="Add Movie">
+      <Label layoutX="190.0" layoutY="33.0" text="Edit Movie">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button layoutX="40.0" layoutY="347.0" mnemonicParsing="false" onAction="#onAddShowTimeButtonClick" prefWidth="55.0" text="Add" />
+      <Button layoutX="40.0" layoutY="347.0" mnemonicParsing="false" onAction="#onAddButtonClick" prefWidth="55.0" text="Add" />
       <Button layoutX="111.0" layoutY="347.0" mnemonicParsing="false" onAction="#onEditButtonClick" prefWidth="55.0" text="Edit" />
       <Button layoutX="181.0" layoutY="347.0" mnemonicParsing="false" onAction="#onDeleteButtonClick" prefWidth="55.0" text="Delete" />
-      <Button layoutX="151.0" layoutY="416.0" mnemonicParsing="false" onAction="#onAddMovieButtonClick" prefWidth="60.0" text="Save" />
+      <Button layoutX="151.0" layoutY="416.0" mnemonicParsing="false" onAction="#onSaveButtonClick" prefWidth="60.0" text="Save" />
       <Button layoutX="275.0" layoutY="416.0" mnemonicParsing="false" onAction="#onCancelButtonClick" prefWidth="60.0" text="Cancel" />
-      <TextField layoutX="291.0" layoutY="120.0" promptText="Enter the title..." />
-      <TextField layoutX="291.0" layoutY="206.0" promptText="Enter the genre..." />
-      <TextField layoutX="291.0" layoutY="298.0" prefHeight="25.0" prefWidth="149.0" promptText="Enter the length..." />
+      <TextField fx:id="aTitleTextField" layoutX="291.0" layoutY="120.0" promptText="Enter the title..." />
+      <TextField fx:id="aGenreTextField" layoutX="291.0" layoutY="206.0" promptText="Enter the genre..." />
+      <TextField fx:id="aLengthTextField" layoutX="291.0" layoutY="298.0" prefHeight="25.0" prefWidth="149.0" promptText="Enter the length..." />
       <Label layoutX="289.0" layoutY="100.0" text="Title:" />
       <Label layoutX="291.0" layoutY="189.0" text="Genre:" />
       <Label layoutX="291.0" layoutY="281.0" text="Length (HH:mm:ss):" />

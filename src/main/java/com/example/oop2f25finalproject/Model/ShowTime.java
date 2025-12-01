@@ -94,5 +94,18 @@ public class ShowTime {
     public void setRoom(Room pRoom) {
         this.aRoom = pRoom;
     }
+
+    /**
+     * Returns a formatted string representation of the showtime,
+     * including the showtime date/time and the room name.
+     * The date/time is formatted as dd/MM/yyyy HH:mm and
+     * separated with tabs for alignment.
+     *
+     * @return a string containing the showtime and room information
+     */
+    @Override
+    public String toString() {
+       return this.aDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + "\t\t Room " + this.aRoom.getName();
+    }
 }
 
