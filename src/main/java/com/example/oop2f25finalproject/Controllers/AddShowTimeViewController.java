@@ -70,10 +70,7 @@ public class AddShowTimeViewController {
                 ShowTime newShowTime = new ShowTime(null, Room.roomList.get(selectedIndex));
 
                 LocalDate date = aDatePicker.getValue();
-                newShowTime.setDateTime(
-                        date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-                                + aTimeTextField.getText()
-                );
+                newShowTime.setDateTime(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " " + aTimeTextField.getText());
 
                 if (aCurrentMovie != null) {
                     aCurrentMovie.addShowTime(newShowTime);
