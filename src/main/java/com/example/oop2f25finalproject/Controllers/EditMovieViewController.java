@@ -119,7 +119,7 @@ public class EditMovieViewController {
         if (selectedIndex != -1) {
             FXMLLoader fxmlLoader = new FXMLLoader(MovieTheatreApplication.class.getResource("edit-show-time-view.fxml"));
             Parent view = fxmlLoader.load();
-            EditSShowTimeViewController newView = fxmlLoader.getController();
+            EditShowTimeViewController newView = fxmlLoader.getController();
             Scene nextScene = new Scene(view, 475, 475);
             Stage nextStage = new Stage();
             newView.setShowTime(this.aMovie.getShowTime(selectedIndex));

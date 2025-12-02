@@ -135,20 +135,16 @@ public class AddMovieViewController {
         if (selectedIndex != -1) {
             FXMLLoader fxmlLoader = new FXMLLoader(MovieTheatreApplication.class.getResource("edit-show-time-view.fxml"));
             Parent view = fxmlLoader.load();
-            EditSShowTimeViewController newView = fxmlLoader.getController();
-
+            EditShowTimeViewController newView = fxmlLoader.getController();
             Scene nextScene = new Scene(view, 475, 475);
             Stage nextStage = new Stage();
-
             newView.setShowTime(this.aShowTimesList.get(selectedIndex));
-
             nextStage.setScene(nextScene);
             nextStage.setTitle("Edit ShowTime");
             nextStage.initModality(Modality.WINDOW_MODAL);
             nextStage.initOwner(((Node) pEvent.getSource()).getScene().getWindow());
             nextStage.setResizable(false);
             nextStage.showAndWait();
-
             this.refreshShowTimes();
         }
         else {
@@ -171,12 +167,9 @@ public class AddMovieViewController {
         FXMLLoader fxmlLoader = new FXMLLoader(MovieTheatreApplication.class.getResource("add-show-time-view.fxml"));
         Parent view = fxmlLoader.load();
         AddShowTimeViewController newView = fxmlLoader.getController();
-
         Scene nextScene = new Scene(view, 475, 475);
         Stage nextStage = new Stage();
-
         newView.setShowTimesList(this.aShowTimesList);
-
         nextStage.setScene(nextScene);
         nextStage.setTitle("New ShowTime");
         nextStage.initModality(Modality.WINDOW_MODAL);
