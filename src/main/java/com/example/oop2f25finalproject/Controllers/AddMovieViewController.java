@@ -82,7 +82,6 @@ public class AddMovieViewController {
             for (ShowTime showTime : aShowTimesList) {
                 newMovie.addShowTime(showTime);
             }
-
             this.onCancelButtonClick();
         }
         catch (Exception e) {
@@ -109,9 +108,8 @@ public class AddMovieViewController {
 
             if (result.isPresent() && result.get() == ButtonType.YES) {
                 this.aShowTimesList.remove(selectedIndex);
+                this.refreshShowTimes();
             }
-
-            this.refreshShowTimes();
         }
         else {
             new Alert(Alert.AlertType.ERROR, "No ShowTime selected", ButtonType.OK).showAndWait();

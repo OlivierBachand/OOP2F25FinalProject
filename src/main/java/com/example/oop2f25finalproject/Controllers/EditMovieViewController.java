@@ -97,6 +97,7 @@ public class EditMovieViewController {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.YES) {
                 this.aMovie.deleteShowTime(selectedIndex);
+                this.refreshShowTimes();
             }
         }
         else

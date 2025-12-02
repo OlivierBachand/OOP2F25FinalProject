@@ -11,9 +11,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -45,10 +44,7 @@ public class MovieManagementViewController {
 
     /** ListView displaying the string representation of all movies. */
     @FXML
-    private ListView<String> aMoviesListView;
-
-    /** Observable list backing the ListView of movies. */
-    private ObservableList<String> aMovies = FXCollections.observableArrayList();
+    private ListView<Movie> aMoviesListView;
 
     /**
      * Handles the Back button click.
@@ -80,9 +76,42 @@ public class MovieManagementViewController {
      * </p>
      */
     public void initialize() {
-        this.aMoviesListView.setItems(this.aMovies);
+        aMoviesListView.setCellFactory(lv -> new ListCell<Movie>() {
+            private final HBox content;
+            private final Label titleLabel;
+            private final Label genreLabel;
+            private final Label lengthLabel;
+
+            {
+                titleLabel = new Label();
+                genreLabel = new Label();
+                lengthLabel = new Label();
+
+                int width = (int) (aMoviesListView.getWidth() / 3);
+                titleLabel.setPrefWidth(width);
+                genreLabel.setPrefWidth(width);
+                lengthLabel.setPrefWidth(width);
+
+                content = new HBox(20);
+                content.getChildren().addAll(titleLabel, genreLabel, lengthLabel);
+            }
+
+            @Override
+            protected void updateItem(Movie item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setGraphic(null);
+                } else {
+                    titleLabel.setText(item.getTitle());
+                    genreLabel.setText(item.getaGenre());
+                    lengthLabel.setText(item.getLength().toString());
+                    setGraphic(content);
+                }
+            }
+        });
+
         for (int i = 0; i < Movie.movieList.size(); i++) {
-            this.aMovies.add(Movie.movieList.get(i).toString());
+            this.aMoviesListView.getItems().add(Movie.getMovie(i));
         }
     }
 
@@ -93,9 +122,9 @@ public class MovieManagementViewController {
      * </p>
      */
     private void refreshMovies() {
-        this.aMovies.clear();
+        this.aMoviesListView.getItems().clear();
         for (int i = 0; i < Movie.movieList.size(); i++) {
-            this.aMovies.add(Movie.movieList.get(i).toString());
+            this.aMoviesListView.getItems().add(Movie.getMovie(i));
         }
     }
 
@@ -142,11 +171,12 @@ public class MovieManagementViewController {
     @FXML
     private void onDeleteButtonClick() {
         int selectedIndex = aMoviesListView.getSelectionModel().getSelectedIndex();
-        if (selectedIndex != -1) {
-            Movie.removeMovie(selectedIndex);
+        if (selectedIndex == -1) {
+            new Alert(Alert.AlertType.ERROR, "No movie selected", ButtonType.OK).showAndWait();
         }
         else {
-            new Alert(Alert.AlertType.ERROR, "No movie selected", ButtonType.OK).showAndWait();
+            Movie.removeMovie(selectedIndex);
+            this.refreshMovies();
         }
     }
 

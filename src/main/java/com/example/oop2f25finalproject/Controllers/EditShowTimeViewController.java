@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 
 public class EditShowTimeViewController {
@@ -30,8 +31,10 @@ public class EditShowTimeViewController {
      * Initializes the view by populating the room combo box with all registered rooms.
      */
     public void initialize() {
-        for (int i = 0; i < Room.roomList.size(); i++) {
-            aRoomComboBox.getItems().add("Room " + Room.roomList.get(i).getName());
+        if (!Room.roomList.isEmpty()) {
+            for (int i = 0; i < Room.roomList.size(); i++) {
+                aRoomComboBox.getItems().add("Room " + Room.roomList.get(i).getName());
+            }
         }
     }
 
@@ -70,10 +73,14 @@ public class EditShowTimeViewController {
 
     /**
      * Assigns an existing showtime to the current showtime variable.
+     * Sets fields as with the showtime's attributes.
      *
      * @param pShowTime the showtime being edited
      */
     public void setShowTime(ShowTime pShowTime) {
         this.aCurrentShowTime = pShowTime;
+        this.aDatePicker.setValue((pShowTime.getaDateTime().toLocalDate()));
+        this.aTimeTextField.setText(pShowTime.getaDateTime().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+        this.aRoomComboBox.getSelectionModel().select(Room.roomList.indexOf(this.aCurrentShowTime.getaRoom()));
     }
 }

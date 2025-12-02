@@ -44,8 +44,10 @@ public class AddShowTimeViewController {
      * Initializes the view by populating the room combo box with all registered rooms.
      */
     public void initialize() {
-        for (int i = 0; i < Room.roomList.size(); i++) {
-            aRoomComboBox.getItems().add("Room " + Room.roomList.get(i).getName());
+        if (!Room.roomList.isEmpty()) {
+            for (int i = 0; i < Room.roomList.size(); i++) {
+                aRoomComboBox.getItems().add("Room " + Room.roomList.get(i).getName());
+            }
         }
     }
 
@@ -78,6 +80,7 @@ public class AddShowTimeViewController {
                 else {
                     aShowTimesList.add(newShowTime);
                 }
+                this.onCancelButtonClick();
             }
             else {
                 new Alert(Alert.AlertType.ERROR, "No room selected", ButtonType.OK).show();
