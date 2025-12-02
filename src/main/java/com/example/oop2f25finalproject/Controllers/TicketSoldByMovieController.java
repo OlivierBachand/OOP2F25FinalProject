@@ -89,3 +89,4 @@ public class TicketSoldByMovieController {
         stage.close();
     }
 }
+
