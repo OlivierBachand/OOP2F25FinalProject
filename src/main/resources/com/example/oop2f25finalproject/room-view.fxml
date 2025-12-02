@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="475.0" prefWidth="475.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oop2f25finalproject.ManagerMovieView">
+<AnchorPane prefHeight="475.0" prefWidth="475.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oop2f25finalproject.Controllers.RoomManagementViewController">
     <children>
         <ListView fx:id="aRoomListView" layoutX="84.0" layoutY="86.0" prefHeight="303.0" prefWidth="307.0" />
         <Button layoutX="111.0" layoutY="411.0" mnemonicParsing="false" onAction="#onDeleteButtonClick" prefWidth="75.0" text="Delete" />
