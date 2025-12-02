@@ -16,18 +16,18 @@ public class TicketsSoldByMovieController {
     @FXML
     private ListView<String> aMovieTicketSoldListView;
 
-    private ObservableList<String> aMovieTSalesList;
+    private ObservableList<String> aMovieTicketSalesList;
 
     @FXML
     public void initialize(){
-        aMovieTSalesList = FXCollections.observableArrayList();
-        aMovieTicketSoldListView.setItems(aMovieTSalesList);
+        aMovieTicketSalesList = FXCollections.observableArrayList();
+        aMovieTicketSoldListView.setItems(aMovieTicketSalesList);
 
         loadTicketSales();
     }
 
     private void loadTicketSales() {
-        aMovieTSalesList.clear();
+        aMovieTicketSalesList.clear();
 
         for (Movie movie : Movie.movieList) {
             int totalTickets = 0;
@@ -39,7 +39,7 @@ public class TicketsSoldByMovieController {
             }
 
             String display = String.format("%s - %d tickets", movie.getTitle(), totalTickets);
-            aMovieTSalesList.add(display);
+            aMovieTicketSalesList.add(display);
         }
     }
 
