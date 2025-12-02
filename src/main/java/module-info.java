@@ -2,6 +2,9 @@ module com.example.oop2f25finalproject {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    requires javafx.base;
+    requires javafx.graphics;
+    requires com.example.oop2f25finalproject;
 
 
     opens com.example.oop2f25finalproject to javafx.fxml;

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="475.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="475.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oop2f25finalproject.Controllers.TicketsSoldByShowtimeController">
    <children>
       <Label layoutX="96.0" layoutY="117.0" text="SHOWTIME:">
          <font>
@@ -19,7 +19,7 @@
          </font>
       </Label>
       <ListView fx:id="aShowtimeTicketsSoldListView" layoutX="38.0" layoutY="153.0" prefHeight="200.0" prefWidth="400.0" />
-      <Button fx:id="onShowtimeCloseButton" layoutX="212.0" layoutY="386.0" mnemonicParsing="false" text="Close" />
+      <Button fx:id="aShowtimeCloseButton" layoutX="212.0" layoutY="386.0" mnemonicParsing="false" onAction="#onShowtimeCloseButton" text="Close" />
       <Label layoutX="172.0" layoutY="45.0" text="Consult Ticket Sales">
          <font>
             <Font name="System Bold" size="14.0" />
