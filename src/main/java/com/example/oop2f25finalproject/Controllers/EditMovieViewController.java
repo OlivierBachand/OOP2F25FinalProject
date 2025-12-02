@@ -18,6 +18,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Optional;
 
 /**
  * Controller for the "Edit Movie" view.
@@ -90,7 +91,16 @@ public class EditMovieViewController {
      */
     @FXML
     private void onDeleteButtonClick() {
-        this.aMovie.deleteShowTime(this.aShowTimeListView.getSelectionModel().getSelectedIndex());
+        int selectedIndex = this.aShowTimeListView.getSelectionModel().getSelectedIndex();
+        if (selectedIndex != -1) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this ShowTime?", ButtonType.YES, ButtonType.NO);
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.YES) {
+                this.aMovie.deleteShowTime(selectedIndex);
+            }
+        }
+        else
+            new Alert(Alert.AlertType.ERROR, "No ShowTime selected", ButtonType.OK).showAndWait();
     }
 
     /**
@@ -123,7 +133,7 @@ public class EditMovieViewController {
             this.refreshShowTimes();
         }
         else {
-            new Alert(Alert.AlertType.ERROR, "No movie selected", ButtonType.OK).showAndWait();
+            new Alert(Alert.AlertType.ERROR, "No ShowTime selected", ButtonType.OK).showAndWait();
         }
     }
 
