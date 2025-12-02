@@ -1,7 +1,5 @@
 package com.example.oop2f25finalproject.Controllers;
 
-import com.example.oop2f25finalproject.Model.AddRoom;
-import com.example.oop2f25finalproject.Model.EditRoom;
 import com.example.oop2f25finalproject.Model.Room;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -37,42 +35,35 @@ public class EditRoomController {
     public Button cancelButton;
 
     /**
-     * Model for editing rooms.
+     * The room being edited.
      */
-    private final EditRoom aEditRoomModel;
-
-    /**
-     * The Room being edited.
-     */
-    private final Room aRoom;
-
-    /**
-     * Constructor receiving the model and the room to edit.
-     *
-     * @param pEditRoomModel The EditRoom model
-     * @param pRoom         The Room to edit
-     */
-    public EditRoomController(EditRoom pEditRoomModel, Room pRoom) {
-        this.aEditRoomModel = pEditRoomModel;
-        this.aRoom = pRoom;
-    }
+    private Room aRoomToEdit;
 
     /**
      * Initializes the controller.
-     * Pre-fills the text fields with the room's current values.
      */
     @FXML
     public void initialize() {
         errorMessageLabel.setText("");
-        roomNameTextField.setText(aRoom.getName());
-        roomCapacityTextField.setText(String.valueOf(aRoom.getCapacity()));
+    }
+
+    /**
+     * Passes the room to edit from the previous view.
+     * Pre-fills the text fields with the room's current values.
+     *
+     * @param pRoomToEdit Room object to edit
+     */
+    public void setRoomToEdit(Room pRoomToEdit) {
+        this.aRoomToEdit = pRoomToEdit;
+        roomNameTextField.setText(pRoomToEdit.getName());
+        roomCapacityTextField.setText(String.valueOf(pRoomToEdit.getCapacity()));
     }
 
     /**
      * Handles save button click.
-     * Attempts to update the room and close the window if successful.
+     * Updates the room and close the window if successful.
      *
-     * @param pEvent The action event
+     * @param pEvent The action event triggered by save button
      */
     @FXML
     public void onSaveButtonClick(ActionEvent pEvent) {
@@ -80,8 +71,15 @@ public class EditRoomController {
         String newCapacity = roomCapacityTextField.getText().trim();
 
         try {
-            // Validate using AddRoom model
-            aEditRoomModel.editRoom(aRoom, newName, newCapacity);
+            // Update room name if changed
+            if (!newName.equalsIgnoreCase(aRoomToEdit.getName())) {
+                aRoomToEdit.setName(newName);
+            }
+
+            // Update capacity if changed
+            if (!newCapacity.equals(String.valueOf(aRoomToEdit.getCapacity()))) {
+                aRoomToEdit.setCapacity(newCapacity);
+            }
 
             // Close the window upon successful edit
             Stage stage = (Stage) saveButton.getScene().getWindow();
@@ -95,7 +93,8 @@ public class EditRoomController {
     /**
      * Handles cancel button click.
      * Closes the window without saving.
-     * @param pEvent The action event
+     *
+     * @param pEvent The action event triggered by cancel button
      */
     @FXML
     public void onCancelButtonClick(ActionEvent pEvent) {
