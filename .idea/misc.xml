@@ -5,6 +5,9 @@
       <writeAnnotation name="javafx.fxml.FXML" />
     </writeAnnotations>
   </component>
+  <component name="ExcludeFromValidation">
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/oop2f25finalproject/Controllers/AddMovieViewController.java" />
+  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MavenProjectsManager">
     <option name="originalFiles">
