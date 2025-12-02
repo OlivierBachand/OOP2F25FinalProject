@@ -19,40 +19,82 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Controller for the room management view.
+ * This controller handles the display and management of cinema rooms,
+ * including adding, editing, and deleting rooms. It displays all rooms
+ * in a ListView with their names and capacities.
+ *
+ * @author Shanley Aninzo
+ */
 public class RoomManagementViewController {
 
+    /** ListView displaying all rooms with their details */
     @FXML
     private ListView<String> aRoomListView;
 
+    /** Observable list containing formatted room information for display */
     private ObservableList<String> aRooms = FXCollections.observableArrayList();
-    
+
+    /**
+     * Initializes the controller and populates the ListView with room data.
+     * This method is automatically called after the FXML file has been loaded.
+     * It sets up the ListView and loads all existing rooms from the system.
+     *
+     */
     @FXML
     public void initialize() {
         aRoomListView.setItems(aRooms);
         refreshRooms();
     }
 
+    /**
+     * Refreshes the room list by reloading all rooms from the Room model.
+     * This method clears the current display list and rebuilds it from
+     * the Room.roomList, formatting each room as "Room [Name] - Capacity: [Number]".
+     * It's called after any add, edit, or delete operation to keep the display current.
+     *
+     */
     private void refreshRooms() {
         aRooms.clear();
         if (Room.roomList != null) {
             for (Room room : Room.roomList) {
-                aRooms.add(String.format("Room %s - Capacity: %d",
-                        room.getName(), room.getCapacity()));
+                aRooms.add(String.format("Room %s - Capacity: %d", room.getName(), room.getCapacity()));
             }
         }
     }
 
+    /**
+     * Handles the back button click event.
+     * Closes the room management window and returns to the previous view
+     *
+     * @param actionEvent the action event triggered by the button click
+     */
     @FXML
     public void onBackButtonClick(ActionEvent actionEvent) {
         Stage stage = (Stage) aRoomListView.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * Handles the close button click event.
+     * Exits the entire application by shutting down the JavaFX runtime.
+     *
+     * @param actionEvent the action event triggered by the button click
+     */
     @FXML
     public void onCloseButtonClick(ActionEvent actionEvent) {
         Platform.exit();
     }
 
+    /**
+     * Handles the add button click event.
+     * Opens a modal dialog for adding a new room. After the dialog is closed,
+     * the room list is refreshed to display the newly added room.
+     *
+     * @param actionEvent the action event triggered by the button click
+     * @throws IOException if the FXML file for the add room view cannot be loaded
+     */
     @FXML
     public void onAddButtonClick(ActionEvent actionEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(
@@ -69,9 +111,19 @@ public class RoomManagementViewController {
         nextStage.setResizable(false);
         nextStage.showAndWait();
 
+        // Refresh the list to show the newly added room
         refreshRooms();
     }
 
+    /**
+     * Handles the edit button click event.
+     * Opens a modal dialog for editing the selected room. If no room is selected,
+     * displays an error alert. After the dialog is closed, the room list is
+     * refreshed to display any changes.
+     *
+     * @param actionEvent the action event triggered by the button click
+     * @throws IOException if the FXML file for the edit room view cannot be loaded
+     */
     @FXML
     public void onEditButtonClick(ActionEvent actionEvent) throws IOException {
         int selectedIndex = aRoomListView.getSelectionModel().getSelectedIndex();
@@ -82,6 +134,7 @@ public class RoomManagementViewController {
             );
             Parent view = fxmlLoader.load();
 
+            // Get the selected room from the model
             Room selectedRoom = Room.getRoom(selectedIndex);
 
             Scene nextScene = new Scene(view, 475, 475);
@@ -93,20 +146,32 @@ public class RoomManagementViewController {
             nextStage.setResizable(false);
             nextStage.showAndWait();
 
+            // Refresh the list to show any changes
             refreshRooms();
         } else {
+            // Show error if no room is selected
             new Alert(Alert.AlertType.ERROR, "No room selected", ButtonType.OK).showAndWait();
         }
     }
 
+    /**
+     * Handles the delete button click event.
+     * Deletes the selected room from the system. If no room is selected,
+     * displays an error alert. After deletion, the room list is refreshed.
+     *
+     * @param actionEvent the action event triggered by the button click
+     */
     @FXML
     public void onDeleteButtonClick(ActionEvent actionEvent) {
         int selectedIndex = aRoomListView.getSelectionModel().getSelectedIndex();
 
         if (selectedIndex != -1) {
+            // Remove the room from the model
             Room.removeRoom(selectedIndex);
+            // Refresh the display
             refreshRooms();
         } else {
+            // Show error if no room is selected
             new Alert(Alert.AlertType.ERROR, "No room selected", ButtonType.OK).showAndWait();
         }
     }
