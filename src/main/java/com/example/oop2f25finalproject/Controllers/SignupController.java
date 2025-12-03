@@ -52,15 +52,6 @@ public class SignupController {
     private Login aLogin;
 
     /**
-     * Setter for injecting the shared Login instance.
-     *
-     * @param aLogin The shared Login instance
-     */
-    public void setLogin(Login aLogin) {
-        this.aLogin = aLogin;
-    }
-
-    /**
      * Initializes the controller.
      * Clears all input fields and the error message label.
      */
@@ -71,6 +62,8 @@ public class SignupController {
         emailTextField.setText("");
         passwordField.setText("");
         confirmPasswordField.setText("");
+
+        this.aLogin = Login.getInstance();
     }
 
     /**

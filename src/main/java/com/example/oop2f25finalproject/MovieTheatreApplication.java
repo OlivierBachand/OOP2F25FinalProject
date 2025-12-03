@@ -13,9 +13,6 @@ import java.io.IOException;
 
 public class MovieTheatreApplication extends Application {
 
-    // shared Login instance
-    private final Login loginModel = new Login();
-
     @Override
     public void start(Stage stage) throws IOException {
 
@@ -26,7 +23,6 @@ public class MovieTheatreApplication extends Application {
         Parent root = fxmlLoader.load();
 
         LoginController loginController = fxmlLoader.getController();
-        loginController.setLogin(loginModel);
 
         Scene scene = new Scene(root,330, 460);
         stage.setTitle("Login");

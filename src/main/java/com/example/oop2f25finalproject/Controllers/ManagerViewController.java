@@ -143,7 +143,6 @@ public class ManagerViewController {
         FXMLLoader fxmlLoader = new FXMLLoader(MovieTheatreApplication.class.getResource("login-view.fxml"));
         Parent view = fxmlLoader.load();
         LoginController newView = fxmlLoader.getController();
-        newView.setLogin(new Login());
         Scene nextScene = new Scene(view, 475, 475);
         Stage nextStage = new Stage();
         nextStage.setScene(nextScene);
