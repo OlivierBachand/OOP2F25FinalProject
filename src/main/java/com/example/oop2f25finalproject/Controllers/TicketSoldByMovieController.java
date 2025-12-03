@@ -68,7 +68,7 @@ public class TicketSoldByMovieController {
             }
 
             // Format
-            String displayText = String.format("%s\t\t%d", movie.getTitle(), totalTicketsSold);
+            String displayText = String.format("%-60s\t\t%d", movie.getTitle(), totalTicketsSold);
 
             salesData.add(displayText);
         }

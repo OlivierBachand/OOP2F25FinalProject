@@ -11,11 +11,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
+import java.time.format.DateTimeFormatter; // Required Import
+
 /**
  * Controller for displaying ticket sales grouped by showtime.
- * This controller populates a ListView with showtime information and their
- * corresponding ticket sales count. Each entry shows the movie title,
- * showtime details, followed by the number of tickets sold.
+ * Displays only the date/time and the tickets sold for each showtime.
  *
  * @author Shanley Aninzo
  */
@@ -31,10 +31,6 @@ public class TicketSoldByShowTimeController {
 
     /**
      * Initializes the controller and populates the ListView with ticket sales data.
-     * This method is automatically called after the FXML file has been loaded.
-     * It iterates through all movies and their showtimes, displaying each
-     * showtime with its ticket sales count.
-     *
      */
     @FXML
     public void initialize() {
@@ -43,15 +39,12 @@ public class TicketSoldByShowTimeController {
 
     /**
      * Loads and displays ticket sales data grouped by showtime.
-     * For each movie in the system, this method:
-     * Iterates through all showtimes for that movie
-     * Counts the tickets sold for each specific showtime
-     * Formats the data including movie title and showtime details
-     * Adds it to the ListView
-     *
      */
     private void loadTicketSalesData() {
         ObservableList<String> salesData = FXCollections.observableArrayList();
+
+        // Define the formatter ONCE outside the loop for efficiency
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a");
 
         // Iterate through all movies
         for (Movie movie : Movie.movieList) {
@@ -60,21 +53,22 @@ public class TicketSoldByShowTimeController {
                 ShowTime showTime = movie.getShowTime(i);
                 int ticketsSold = showTime.getTickets().size();
 
-                // Format
-                String displayText = String.format("%s - %s\t\t%d", movie.getTitle(), showTime.toString(), ticketsSold);
+                // Format the date/time using the reusable formatter object
+                String dateTimeOnly = showTime.getaDateTime().format(formatter);
+
+                // Format the output string
+                String displayText = String.format("%-60s\t\t%d", dateTimeOnly, ticketsSold);
+
                 salesData.add(displayText);
             }
         }
 
-        // Set the data to the ListView
         aShowtimeTicketsSoldListView.setItems(salesData);
     }
 
     /**
      * Handles the close button click event.
      * Closes the current window and returns to the manager view.
-     *
-     * @param pEvent the action event triggered by clicking the close button
      */
     @FXML
     private void onShowtimeCloseButton(ActionEvent pEvent) {
