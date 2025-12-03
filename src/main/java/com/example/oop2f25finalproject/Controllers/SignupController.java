@@ -3,6 +3,7 @@ package com.example.oop2f25finalproject.Controllers;
 import com.example.oop2f25finalproject.Model.Client;
 import com.example.oop2f25finalproject.Model.Signup;
 import com.example.oop2f25finalproject.Model.Login;
+import com.example.oop2f25finalproject.MovieTheatreApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,8 +18,11 @@ import java.io.IOException;
 
 /**
  * Controller for the sign-up page.
- * Handles user input.
- * Redirects to the Client Dashboard.
+ * <p>
+ * Handles user input, passes it to the Signup model
+ * for validation and registration, and
+ * redirects to the Client Dashboard on successful registration.
+ * </p>
  *
  * @author Rohina
  */
@@ -43,25 +47,30 @@ public class SignupController {
     public Button signupButton;
 
     /**
-     * The signup model handling registration logic
+     * The shared Login model instance for storing clients.
      */
-    private final Signup aSignup;
+    private Login aLogin;
 
     /**
-     * Constructor for the controller.
-     * Passes in the shared Login instance to the Signup model.
+     * Setter for injecting the shared Login instance.
+     *
+     * @param aLogin The shared Login instance
      */
-    public SignupController(Login pLogin) {
-        this.aSignup = new Signup(pLogin);
+    public void setLogin(Login aLogin) {
+        this.aLogin = aLogin;
     }
 
     /**
      * Initializes the controller.
-     * Clears the error message label.
+     * Clears all input fields and the error message label.
      */
     @FXML
     public void initialize() {
         errorMessageLabel.setText("");
+        nameTextField.setText("");
+        emailTextField.setText("");
+        passwordField.setText("");
+        confirmPasswordField.setText("");
     }
 
     /**
@@ -76,32 +85,26 @@ public class SignupController {
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
 
-        // Validate passwords match
-        if (!password.equals(confirmPassword)) {
-            errorMessageLabel.setText("Passwords do not match");
-            return;
-        }
-
         try {
-            // Register the client
-            Client newClient = aSignup.registerClient(name, email, password, confirmPassword);
+            // Use the Signup model for registration and validation
+            Signup signup = new Signup(aLogin);
+            Client newClient = signup.registerClient(name, email, password, confirmPassword);
 
             // Redirect to the Client Dashboard
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("client-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MovieTheatreApplication.class.getResource("/com/example/oop2f25finalproject/client-view.fxml"));
             Parent root = fxmlLoader.load();
 
-            Stage stage = (Stage) nameTextField.getScene().getWindow();
+            Stage stage = (Stage) signupButton.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle("Dashboard");
             stage.show();
 
         } catch (IllegalArgumentException e) {
-            // Show validation errors in the errorMessage label
+            // Display validation errors from the Signup model in the errorMessage label
             errorMessageLabel.setText(e.getMessage());
         } catch (IOException e) {
             errorMessageLabel.setText("Failed to load Dashboard. Please refresh the page.");
-            System.err.println("IOException while loading Dashboard: " + e.getMessage());
         }
     }
 }
