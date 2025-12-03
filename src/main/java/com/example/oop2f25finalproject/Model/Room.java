@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class Room {
     /** A static collection maintaining all Room instances created. */
-    public static List<Room> roomList;
+    public static List<Room> roomList = new ArrayList<>();
 
     /** Maximum number of people the room can accommodate. */
     private int aCapacity;
@@ -34,7 +34,6 @@ public class Room {
     public Room(int pCapacity, String pName) {
         this.setCapacity(pCapacity);
         this.setName(pName);
-        Room.roomList = new ArrayList<>();
         Room.addRoom(this);
     }
 
@@ -50,7 +49,6 @@ public class Room {
     public Room(String pCapacity, String pName) {
         this.setCapacity(pCapacity);
         this.setName(pName);
-        Room.roomList = new ArrayList<>();
         Room.addRoom(this);
     }
 

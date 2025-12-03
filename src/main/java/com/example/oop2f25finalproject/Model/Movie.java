@@ -187,20 +187,8 @@ public class Movie {
      * @throws ParseException if the string does not match <code>HH:mm:ss</code>
      */
     public void setLength(String pLength) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
         Date date = sdf.parse(pLength);
         aLength = new Time(date.getTime());
-    }
-
-    /**
-     * Returns a formatted string representation of the movie,
-     * including its title, genre, and length. Fields are separated
-     * with tabs for aligned display in lists or tables.
-     *
-     * @return a string containing the movie's title, genre, and length
-     */
-    @Override
-    public String toString() {
-        return this.aTitle + "\t\t" + this.aGenre + "\t\t" + this.aLength;
     }
 }
