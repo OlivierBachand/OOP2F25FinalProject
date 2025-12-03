@@ -20,9 +20,6 @@ public class AddRoomController {
     public Label messageLabel;
 
     @FXML
-    public TextField roomNoTextField;
-
-    @FXML
     public TextField roomNameTextField;
 
     @FXML

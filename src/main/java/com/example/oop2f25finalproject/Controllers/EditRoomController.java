@@ -8,9 +8,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.util.List;
+
 /**
  * Controller for editing an existing Room.
- * Uses EditRoom model for validation and updating.
+ * Uses the Room model for validation and updating.
  *
  * @author Rohina
  */
@@ -18,9 +20,6 @@ public class EditRoomController {
 
     @FXML
     public Label errorMessageLabel;
-
-    @FXML
-    public TextField roomNoTextField;
 
     @FXML
     public TextField roomNameTextField;
@@ -48,13 +47,14 @@ public class EditRoomController {
     }
 
     /**
-     * Passes the room to edit from the previous view.
+     * Passes the room to edit and
      * Pre-fills the text fields with the room's current values.
      *
      * @param pRoomToEdit Room object to edit
      */
     public void setRoomToEdit(Room pRoomToEdit) {
         this.aRoomToEdit = pRoomToEdit;
+
         roomNameTextField.setText(pRoomToEdit.getName());
         roomCapacityTextField.setText(String.valueOf(pRoomToEdit.getCapacity()));
     }
