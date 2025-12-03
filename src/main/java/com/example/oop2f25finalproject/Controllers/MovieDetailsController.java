@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Controller for the movie details view.
@@ -51,7 +52,12 @@ public class MovieDetailsController {
     public void setMovieDetails(Movie pMovie, ShowTime pShowTime) {
         aTitleDetailLabel.setText(pMovie.getTitle());
         aGenreDetailLabel.setText(pMovie.getaGenre());
-        aShowtimeDetailLabel.setText(pShowTime.toString());
+
+        // Format showtime without room info
+        String showtimeOnly = pShowTime.getaDateTime()
+                .format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a"));
+        aShowtimeDetailLabel.setText(showtimeOnly);
+
         aRoomDetailLabel.setText(pShowTime.getaRoom().getName());
         aTicketPriceDetailLabel.setText("Check at counter");
     }
