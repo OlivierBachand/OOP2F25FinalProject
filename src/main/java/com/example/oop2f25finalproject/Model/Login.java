@@ -12,12 +12,23 @@ import java.util.List;
 
 public class Login {
 
+    /**
+     * The singleton instance of Login.
+     */
     private static Login instance;
 
-    private final Manager manager; // single fixed manager
-    private final List<Client> clients; // dynamic list of clients
+    /**
+     * Single fixed manager account.
+     */
+    private final Manager manager;
 
     /**
+     * List of registered clients.
+     */
+    private final List<Client> clients;
+
+    /**
+     * Private constructor to enforce singleton pattern.
      * Initializes the login model with a fixed manager and empty client list.
      */
     private Login() {
@@ -26,6 +37,10 @@ public class Login {
         clients = new ArrayList<>();
     }
 
+    /**
+     * Created if the instance does not exist.
+     * @return The singleton Login instance
+     */
     public static Login getInstance() {
         if (instance == null) {
             instance = new Login();
@@ -33,7 +48,7 @@ public class Login {
         return instance;
     }
     /**
-     * Registers a new client
+     * Registers a new client by adding it to the client list.
      *
      * @param client The client to register
      */

@@ -8,8 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.util.List;
-
 /**
  * Controller for editing an existing Room.
  * Uses the Room model for validation and updating.
