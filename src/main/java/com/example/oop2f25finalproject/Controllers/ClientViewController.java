@@ -54,9 +54,10 @@ public class ClientViewController {
         for (Movie movie : Movie.movieList) {
             for (int i = 0; i < movie.getShowTimesSize(); i++) {
                 ShowTime showTime = movie.getShowTime(i);
-                // Extract only the date/time part from showTime.toString()
-                String formattedDateTime = showTime.toString().split("\t\t")[0];
-                String displayText = String.format("%s\t\t%s", movie.getTitle(), formattedDateTime);
+                // Get only the date/time, not the room info
+                String dateTimeOnly = showTime.getaDateTime()
+                        .format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a"));
+                String displayText = String.format("%-40s\t\t%s", movie.getTitle(), dateTimeOnly);
                 displayList.add(displayText);
             }
         }
@@ -74,11 +75,12 @@ public class ClientViewController {
         for (Movie movie : Movie.movieList) {
             for (int i = 0; i < movie.getShowTimesSize(); i++) {
                 ShowTime showTime = movie.getShowTime(i);
-                // Put datetime first for chronological sorting, then format for display
+                // Put datetime first for chronological sorting
                 String sortKey = showTime.getaDateTime().toString();
-                // Extract only the date/time part from showTime.toString()
-                String formattedDateTime = showTime.toString().split("\t\t")[0];
-                String displayText = String.format("%s\t\t%s", movie.getTitle(), formattedDateTime);
+                // Get only the date/time, not the room info
+                String dateTimeOnly = showTime.getaDateTime()
+                        .format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a"));
+                String displayText = String.format("%-40s\t\t%s", movie.getTitle(), dateTimeOnly);
                 displayList.add(sortKey + "|" + displayText);
             }
         }
@@ -156,7 +158,7 @@ public class ClientViewController {
         String movieTitle = parts[0].trim();
         String showtimeInfo = parts[1].trim(); // showtimeInfo is now only the datetime string
 
-        // Find the matching movie and showtime
+// Find the matching movie and showtime
         Movie selectedMovie = null;
         ShowTime selectedShowtime = null;
 
@@ -164,10 +166,10 @@ public class ClientViewController {
             if (movie.getTitle().equals(movieTitle)) {
                 for (int i = 0; i < movie.getShowTimesSize(); i++) {
                     ShowTime showTime = movie.getShowTime(i);
-                    // Extract the datetime part from the ShowTime object's toString()
-                    // and compare it to the selected datetime string.
-                    String showTimeObjectDateTime = showTime.toString().split("\t\t")[0];
-                    if (showTimeObjectDateTime.equals(showtimeInfo)) {
+                    // Format the showtime's datetime to match display format
+                    String showTimeFormatted = showTime.getaDateTime()
+                            .format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a"));
+                    if (showTimeFormatted.equals(showtimeInfo)) {
                         selectedMovie = movie;
                         selectedShowtime = showTime;
                         break;

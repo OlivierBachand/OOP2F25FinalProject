@@ -2,6 +2,7 @@ package com.example.oop2f25finalproject;
 
 import com.example.oop2f25finalproject.Controllers.LoginController;
 import com.example.oop2f25finalproject.Model.Login;
+import com.example.oop2f25finalproject.Model.TestDataInitializer;  // import
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,6 +18,9 @@ public class MovieTheatreApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        // Initialize test data before loading any views, uses import.
+        TestDataInitializer.initializeTestData();
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login-view.fxml"));
         Parent root = fxmlLoader.load();
 

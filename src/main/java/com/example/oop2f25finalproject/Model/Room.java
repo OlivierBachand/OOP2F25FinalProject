@@ -34,6 +34,9 @@ public class Room {
     public Room(int pCapacity, String pName) {
         this.setCapacity(pCapacity);
         this.setName(pName);
+        if (Room.roomList == null) {  // Only create list if it doesn't exist
+            Room.roomList = new ArrayList<>();
+        }
         Room.addRoom(this);
     }
 
@@ -49,6 +52,9 @@ public class Room {
     public Room(String pCapacity, String pName) {
         this.setCapacity(pCapacity);
         this.setName(pName);
+        if (Room.roomList == null) {  // Only create list if it doesn't exist
+            Room.roomList = new ArrayList<>();
+        }
         Room.addRoom(this);
     }
 
