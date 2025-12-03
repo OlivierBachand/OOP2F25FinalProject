@@ -10,10 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -49,6 +46,9 @@ public class EditMovieViewController {
     /** The movie currently being edited. */
     @FXML
     private Movie aMovie;
+
+    @FXML
+    private Button aEditButton;
 
     /** Observable list used to populate the ListView of showtimes. */
     @FXML
@@ -121,7 +121,7 @@ public class EditMovieViewController {
             FXMLLoader fxmlLoader = new FXMLLoader(MovieTheatreApplication.class.getResource("edit-show-time-view.fxml"));
             Parent view = fxmlLoader.load();
             EditShowTimeViewController newView = fxmlLoader.getController();
-            Scene nextScene = new Scene(view, 475, 475);
+            Scene nextScene = new Scene(view, 286, 266);
             Stage nextStage = new Stage();
             newView.setShowTime(this.aMovie.getShowTime(selectedIndex));
             nextScene.getWindow();
@@ -132,9 +132,6 @@ public class EditMovieViewController {
             nextStage.setResizable(false);
             nextStage.showAndWait();
             this.refreshShowTimes();
-        }
-        else {
-            new Alert(Alert.AlertType.ERROR, "No ShowTime selected", ButtonType.OK).showAndWait();
         }
     }
 
@@ -152,7 +149,7 @@ public class EditMovieViewController {
         FXMLLoader fxmlLoader = new FXMLLoader(MovieTheatreApplication.class.getResource("add-show-time-view.fxml"));
         Parent view = fxmlLoader.load();
         AddShowTimeViewController newView = fxmlLoader.getController();
-        Scene nextScene = new Scene(view, 475, 475);
+        Scene nextScene = new Scene(view, 286, 266);
         Stage nextStage = new Stage();
         newView.setMovie(this.aMovie);
         nextStage.setScene(nextScene);
@@ -169,6 +166,11 @@ public class EditMovieViewController {
      * Sets the ListView to use the observable list of showtimes.
      */
     public void initialize() {
+        aShowTimeListView.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) { // double click
+                aEditButton.fire();
+            }
+        });
         this.aShowTimeListView.setItems(this.aShowTimes);
     }
 

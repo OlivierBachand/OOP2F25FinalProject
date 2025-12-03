@@ -68,6 +68,9 @@ public class MovieManagementViewController {
         Platform.exit();
     }
 
+    @FXML
+    private Button aEditButton;
+
     /**
      * Initializes the Movie Management view.
      * <p>
@@ -106,6 +109,12 @@ public class MovieManagementViewController {
                     lengthLabel.setText(item.getLength().toString());
                     setGraphic(content);
                 }
+            }
+        });
+
+        aMoviesListView.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) { // double click
+                aEditButton.fire();
             }
         });
 
@@ -155,9 +164,6 @@ public class MovieManagementViewController {
             nextStage.setResizable(false);
             nextStage.showAndWait();
             this.refreshMovies();
-        }
-        else {
-            new Alert(Alert.AlertType.ERROR, "No movie selected", ButtonType.OK).showAndWait();
         }
     }
 

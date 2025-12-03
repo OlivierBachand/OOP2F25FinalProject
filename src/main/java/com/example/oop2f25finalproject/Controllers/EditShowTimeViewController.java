@@ -61,6 +61,7 @@ public class EditShowTimeViewController {
 
                 LocalDateTime dateTime = LocalDateTime.of(date, time);
                 aCurrentShowTime.setDateTime(dateTime);
+                aCurrentShowTime.setRoom(Room.roomList.get(selectedIndex));
                 this.onCancelButtonClick();
             }
             else {
