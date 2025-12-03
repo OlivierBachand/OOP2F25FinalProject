@@ -7,7 +7,10 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 
 public class EditShowTimeViewController {
@@ -30,8 +33,10 @@ public class EditShowTimeViewController {
      * Initializes the view by populating the room combo box with all registered rooms.
      */
     public void initialize() {
-        for (int i = 0; i < Room.roomList.size(); i++) {
-            aRoomComboBox.getItems().add("Room " + Room.roomList.get(i).getName());
+        if (!Room.roomList.isEmpty()) {
+            for (int i = 0; i < Room.roomList.size(); i++) {
+                aRoomComboBox.getItems().add("Room " + Room.roomList.get(i).getName());
+            }
         }
     }
 
@@ -49,7 +54,15 @@ public class EditShowTimeViewController {
             int selectedIndex = aRoomComboBox.getSelectionModel().getSelectedIndex();
             if (selectedIndex != -1) {
                 LocalDate date = aDatePicker.getValue();
-                this.aCurrentShowTime.setDateTime(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " " + aTimeTextField.getText());
+                LocalTime time = LocalTime.parse(
+                        aTimeTextField.getText(),
+                        DateTimeFormatter.ofPattern("h:mm a", Locale.ENGLISH)
+                );
+
+                LocalDateTime dateTime = LocalDateTime.of(date, time);
+                aCurrentShowTime.setDateTime(dateTime);
+                aCurrentShowTime.setRoom(Room.roomList.get(selectedIndex));
+                this.onCancelButtonClick();
             }
             else {
                 new Alert(Alert.AlertType.ERROR, "No room selected", ButtonType.OK).show();
@@ -70,10 +83,14 @@ public class EditShowTimeViewController {
 
     /**
      * Assigns an existing showtime to the current showtime variable.
+     * Sets fields as with the showtime's attributes.
      *
      * @param pShowTime the showtime being edited
      */
     public void setShowTime(ShowTime pShowTime) {
         this.aCurrentShowTime = pShowTime;
+        this.aDatePicker.setValue((pShowTime.getaDateTime().toLocalDate()));
+        this.aTimeTextField.setText(pShowTime.getaDateTime().format(DateTimeFormatter.ofPattern("h:mm a", Locale.ENGLISH)));
+        this.aRoomComboBox.getSelectionModel().select(Room.roomList.indexOf(this.aCurrentShowTime.getaRoom()));
     }
 }

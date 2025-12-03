@@ -14,7 +14,7 @@
       </Label>
       <Label layoutX="47.0" layoutY="49.0" text="Date:" />
       <TextField fx:id="aTimeTextField" layoutX="59.0" layoutY="118.0" />
-      <Label layoutX="48.0" layoutY="101.0" text="Time (hh:mm):" />
+      <Label layoutX="48.0" layoutY="101.0" text="Time (hh:mm AM/PM):" />
       <Button layoutX="56.0" layoutY="224.0" mnemonicParsing="false" onAction="#onSaveButtonClick" prefHeight="25.0" prefWidth="60.0" text="Save" />
       <Button layoutX="155.0" layoutY="224.0" mnemonicParsing="false" onAction="#onCancelButtonClick" prefHeight="25.0" prefWidth="60.0" text="Cancel" />
       <ComboBox fx:id="aRoomComboBox" layoutX="58.0" layoutY="167.0" prefWidth="150.0" />

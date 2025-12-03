@@ -8,8 +8,11 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Controller for the "Add ShowTime" view.
@@ -44,8 +47,10 @@ public class AddShowTimeViewController {
      * Initializes the view by populating the room combo box with all registered rooms.
      */
     public void initialize() {
-        for (int i = 0; i < Room.roomList.size(); i++) {
-            aRoomComboBox.getItems().add("Room " + Room.roomList.get(i).getName());
+        if (!Room.roomList.isEmpty()) {
+            for (int i = 0; i < Room.roomList.size(); i++) {
+                aRoomComboBox.getItems().add("Room " + Room.roomList.get(i).getName());
+            }
         }
     }
 
@@ -70,7 +75,14 @@ public class AddShowTimeViewController {
                 ShowTime newShowTime = new ShowTime(null, Room.roomList.get(selectedIndex));
 
                 LocalDate date = aDatePicker.getValue();
-                newShowTime.setDateTime(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " " + aTimeTextField.getText());
+                LocalTime time = LocalTime.parse(
+                        aTimeTextField.getText(),
+                        DateTimeFormatter.ofPattern("h:mm a", Locale.ENGLISH)
+                );
+
+                LocalDateTime dateTime = LocalDateTime.of(date, time);
+                newShowTime.setDateTime(dateTime);
+                newShowTime.setRoom(Room.roomList.get(selectedIndex));
 
                 if (aCurrentMovie != null) {
                     aCurrentMovie.addShowTime(newShowTime);
@@ -78,6 +90,7 @@ public class AddShowTimeViewController {
                 else {
                     aShowTimesList.add(newShowTime);
                 }
+                this.onCancelButtonClick();
             }
             else {
                 new Alert(Alert.AlertType.ERROR, "No room selected", ButtonType.OK).show();

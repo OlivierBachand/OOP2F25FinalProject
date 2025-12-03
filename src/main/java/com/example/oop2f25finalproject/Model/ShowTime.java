@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Represents a scheduled movie showtime, including the date/time,
@@ -75,15 +76,12 @@ public class ShowTime {
     }
 
     /**
-     * Sets the date and time of the showtime using a formatted string.
-     * Expected format: dd/MM/yyyy HH:mm
+     * Sets the datetime of the showtime using a LocalDateTime.
      *
-     * @param pDateTime the date/time string
-     * @throws java.time.format.DateTimeParseException if the format is invalid
+     * @param pDateTime the LocalDateTime
      */
-    public void setDateTime(String pDateTime) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        this.aDateTime = LocalDateTime.parse(pDateTime, formatter);
+    public void setDateTime(LocalDateTime pDateTime) {
+        this.aDateTime = pDateTime;
     }
 
     /**
@@ -105,7 +103,7 @@ public class ShowTime {
      */
     @Override
     public String toString() {
-       return this.aDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + "\t\t Room " + this.aRoom.getName();
+       return this.aDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a", Locale.ENGLISH)) + "\t Room " + this.aRoom.getName();
     }
 }
 

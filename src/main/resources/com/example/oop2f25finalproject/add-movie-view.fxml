@@ -17,13 +17,13 @@
          </font>
       </Label>
       <Button layoutX="40.0" layoutY="347.0" mnemonicParsing="false" onAction="#onAddShowTimeButtonClick" prefWidth="55.0" text="Add" />
-      <Button layoutX="111.0" layoutY="347.0" mnemonicParsing="false" onAction="#onEditButtonClick" prefWidth="55.0" text="Edit" />
+      <Button fx:id="aEditButton" layoutX="111.0" layoutY="347.0" mnemonicParsing="false" onAction="#onEditButtonClick" prefWidth="55.0" text="Edit" />
       <Button layoutX="181.0" layoutY="347.0" mnemonicParsing="false" onAction="#onDeleteButtonClick" prefWidth="55.0" text="Delete" />
       <Button layoutX="151.0" layoutY="416.0" mnemonicParsing="false" onAction="#onAddMovieButtonClick" prefWidth="60.0" text="Add" />
       <Button layoutX="275.0" layoutY="416.0" mnemonicParsing="false" onAction="#onCancelButtonClick" prefWidth="60.0" text="Cancel" />
-      <TextField layoutX="291.0" layoutY="120.0" promptText="Enter the title..." />
-      <TextField layoutX="291.0" layoutY="206.0" promptText="Enter the genre..." />
-      <TextField layoutX="291.0" layoutY="298.0" prefHeight="25.0" prefWidth="149.0" promptText="Enter the length..." />
+      <TextField layoutX="291.0" layoutY="120.0" promptText="Enter the title..." fx:id="aTitleTextField" />
+      <TextField layoutX="291.0" layoutY="206.0" promptText="Enter the genre..." fx:id="aGenreTextField" />
+      <TextField layoutX="291.0" layoutY="298.0" prefHeight="25.0" prefWidth="149.0" promptText="Enter the length..." fx:id="aLengthTextField" />
       <Label layoutX="289.0" layoutY="100.0" text="Title:" />
       <Label layoutX="291.0" layoutY="189.0" text="Genre:" />
       <Label layoutX="291.0" layoutY="281.0" text="Length (HH:mm:ss):" />

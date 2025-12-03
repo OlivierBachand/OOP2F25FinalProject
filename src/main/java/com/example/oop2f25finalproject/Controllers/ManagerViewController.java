@@ -1,5 +1,6 @@
 package com.example.oop2f25finalproject.Controllers;
 
+import com.example.oop2f25finalproject.Model.Login;
 import com.example.oop2f25finalproject.MovieTheatreApplication;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -71,7 +72,7 @@ public class ManagerViewController {
     private void onManageRoomsButtonClick(ActionEvent pEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MovieTheatreApplication.class.getResource("room-view.fxml"));
         Parent view = fxmlLoader.load();
-        RoomManagementView newView = fxmlLoader.getController();
+        RoomManagementViewController newView = fxmlLoader.getController();
         Scene nextScene = new Scene(view, 475, 475);
         Stage nextStage = new Stage();
         nextStage.setScene(nextScene);
@@ -141,17 +142,19 @@ public class ManagerViewController {
     private void onLogOutButtonClick(ActionEvent pEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MovieTheatreApplication.class.getResource("login-view.fxml"));
         Parent view = fxmlLoader.load();
-        LogInViewController newView = fxmlLoader.getController();
+        LoginController newView = fxmlLoader.getController();
+        newView.setLogin(new Login());
         Scene nextScene = new Scene(view, 475, 475);
         Stage nextStage = new Stage();
         nextStage.setScene(nextScene);
-        nextStage.setTitle("Ticket Sales");
+        nextStage.setTitle("Login");
         nextStage.initModality(Modality.WINDOW_MODAL);
         nextStage.initOwner(((Node) pEvent.getSource()).getScene().getWindow());
         nextStage.setResizable(false);
-        nextStage.show();
         Stage stage = (Stage) aLogOutButton.getScene().getWindow();
-        stage.close();
+        stage.setScene(nextScene);
+        stage.setTitle("Login");
+        stage.show();
     }
 
     /**
