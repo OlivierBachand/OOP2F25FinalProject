@@ -3,6 +3,7 @@ package com.example.oop2f25finalproject.Controllers;
 import com.example.oop2f25finalproject.Model.Login;
 import com.example.oop2f25finalproject.Model.Manager;
 import com.example.oop2f25finalproject.Model.User;
+import com.example.oop2f25finalproject.MovieTheatreApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,11 +15,11 @@ import java.io.IOException;
 
 /**
  * Controller for the login page.
+ * <p>
  * Handles user input, validates credentials, and redirects to the appropriate dashboard
- * based on the user role (Manager or Client).
- * It Also allows navigation to the sign-up page.
- *
- * It uses a shared login model for authentication and client management.
+ * based on the user role (Manager or Client), and allows navigation to the sign-up page.
+ * </p>
+ * Uses a shared login model for authentication and client management.
  *
  * @author Rohina
  */
@@ -42,38 +43,45 @@ public class LoginController {
     /**
      * The shared login model used for authentication
      */
-    private final Login aLogin;
+    private Login aLogin;
 
     /**
-     * Constructor that receives the shared login instance.
-     *
-     * @param pLogin The shared login model
+     * Default constructor.
+     * The shared login instance must be set using {@link #setLogin(Login)}.
      */
-    public LoginController(Login pLogin) {
-        this.aLogin = pLogin;
+    public LoginController() {
+
+    }
+
+    /**
+     * Sets the shared Login instance for authentication and registration.
+     *
+     * @param aLogin The shared Login model
+     */
+    public void setLogin(Login aLogin) {
+        this.aLogin = aLogin;
     }
 
     /**
      * Initializes the controller.
-     * Clears the error message label when the scene loads.
+     * Clears all input fields and the error message label when the scene loads.
      */
     @FXML
     public void initialize() {
         errorMessageLabel.setText("");
+        emailTextField.setText("");
+        passwordTextField.setText("");
     }
 
     /**
      * Handles the login button click event.
-     *
-     * Reads and trims user input.
-     * Validates input.
-     * Authenticates user using the login model
-     * Redirects to the appropriate dashboard based on the user role.
-     *
-     * @throws IOException If the FXML for the dashboard cannot be loaded
+     * <p>
+     * Validates input fields, authenticates the user using the Login model,
+     * and redirects to the appropriate dashboard based on the user role.
+     * </p>
      */
     @FXML
-    public void onLoginButtonClick() throws IOException {
+    public void onLoginButtonClick() {
         String email = emailTextField.getText().trim();
         String password = passwordTextField.getText();
 
@@ -97,9 +105,9 @@ public class LoginController {
             FXMLLoader fxmlLoader;
 
             if (loggedInUser instanceof Manager) {
-                fxmlLoader = new FXMLLoader(getClass().getResource("manager-view.fxml"));
+                fxmlLoader = new FXMLLoader(MovieTheatreApplication.class.getResource("/com/example/oop2f25finalproject/manager-view.fxml"));
             } else {
-                fxmlLoader = new FXMLLoader(getClass().getResource("client-view.fxml"));
+                fxmlLoader = new FXMLLoader(MovieTheatreApplication.class.getResource("/com/example/oop2f25finalproject/client-view.fxml"));
             }
 
             Parent root = fxmlLoader.load();
@@ -107,30 +115,34 @@ public class LoginController {
             stage.setScene(scene);
             stage.setTitle("Dashboard");
             stage.show();
+
         } catch (IOException e) {
-            e.printStackTrace();
             errorMessageLabel.setText("Failed to load Dashboard. Please refresh the page.");
-            System.err.println("IOException while loading Dashboard: " + e.getMessage());
         }
     }
 
     /**
      * Handles the create account button click.
-     * Navigates to the sign-up page, passing the shared login instance to the SignupController.
-     *
-     * @throws IOException If the sign-up FXML cannot be loaded
+     * Navigates to the sign-up page, passing the shared login instance
+     * to the SignupController.
      */
     @FXML
-    public void onCreateAccountButtonClick() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("signup-view.fxml"));
-        fxmlLoader.setController(new SignupController(aLogin));
-        Parent root = fxmlLoader.load();
+    public void onCreateAccountButtonClick() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MovieTheatreApplication.class.getResource("/com/example/oop2f25finalproject/signup-view.fxml"));
+            Parent root = fxmlLoader.load();
 
-        Stage stage = (Stage) createAccountButton.getScene().getWindow();
+            SignupController signupController = fxmlLoader.getController();
+            signupController.setLogin(aLogin);
 
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle("Sign Up");
-        stage.show();
+            Stage stage = (Stage) createAccountButton.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Sign Up");
+            stage.show();
+
+        } catch (IOException e) {
+            errorMessageLabel.setText("Failed to load Sign Up page. Please try again.");
+        }
     }
 }
