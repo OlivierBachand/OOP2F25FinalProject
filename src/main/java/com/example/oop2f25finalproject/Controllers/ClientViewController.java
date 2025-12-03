@@ -2,7 +2,6 @@ package com.example.oop2f25finalproject.Controllers;
 
 import com.example.oop2f25finalproject.Model.Movie;
 import com.example.oop2f25finalproject.Model.ShowTime;
-import com.example.oop2f25finalproject.Model.Ticket;
 import com.example.oop2f25finalproject.MovieTheatreApplication;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -55,7 +54,9 @@ public class ClientViewController {
         for (Movie movie : Movie.movieList) {
             for (int i = 0; i < movie.getShowTimesSize(); i++) {
                 ShowTime showTime = movie.getShowTime(i);
-                String displayText = String.format("%s\t\t%s", movie.getTitle(), showTime.toString());
+                // Extract only the date/time part from showTime.toString()
+                String formattedDateTime = showTime.toString().split("\t\t")[0];
+                String displayText = String.format("%s\t\t%s", movie.getTitle(), formattedDateTime);
                 displayList.add(displayText);
             }
         }
@@ -75,7 +76,9 @@ public class ClientViewController {
                 ShowTime showTime = movie.getShowTime(i);
                 // Put datetime first for chronological sorting, then format for display
                 String sortKey = showTime.getaDateTime().toString();
-                String displayText = String.format("%s\t\t%s", movie.getTitle(), showTime.toString());
+                // Extract only the date/time part from showTime.toString()
+                String formattedDateTime = showTime.toString().split("\t\t")[0];
+                String displayText = String.format("%s\t\t%s", movie.getTitle(), formattedDateTime);
                 displayList.add(sortKey + "|" + displayText);
             }
         }
@@ -151,7 +154,7 @@ public class ClientViewController {
         }
 
         String movieTitle = parts[0].trim();
-        String showtimeInfo = parts[1].trim();
+        String showtimeInfo = parts[1].trim(); // showtimeInfo is now only the datetime string
 
         // Find the matching movie and showtime
         Movie selectedMovie = null;
@@ -161,7 +164,10 @@ public class ClientViewController {
             if (movie.getTitle().equals(movieTitle)) {
                 for (int i = 0; i < movie.getShowTimesSize(); i++) {
                     ShowTime showTime = movie.getShowTime(i);
-                    if (showTime.toString().equals(showtimeInfo)) {
+                    // Extract the datetime part from the ShowTime object's toString()
+                    // and compare it to the selected datetime string.
+                    String showTimeObjectDateTime = showTime.toString().split("\t\t")[0];
+                    if (showTimeObjectDateTime.equals(showtimeInfo)) {
                         selectedMovie = movie;
                         selectedShowtime = showTime;
                         break;
