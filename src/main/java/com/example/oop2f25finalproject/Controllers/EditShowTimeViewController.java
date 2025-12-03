@@ -7,8 +7,11 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Locale;
 
 
 public class EditShowTimeViewController {
@@ -52,7 +55,13 @@ public class EditShowTimeViewController {
             int selectedIndex = aRoomComboBox.getSelectionModel().getSelectedIndex();
             if (selectedIndex != -1) {
                 LocalDate date = aDatePicker.getValue();
-                this.aCurrentShowTime.setDateTime(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " " + aTimeTextField.getText());
+                LocalTime time = LocalTime.parse(
+                        aTimeTextField.getText(),
+                        DateTimeFormatter.ofPattern("h:mm a", Locale.ENGLISH)
+                );
+
+                LocalDateTime dateTime = LocalDateTime.of(date, time);
+                aCurrentShowTime.setDateTime(dateTime);
             }
             else {
                 new Alert(Alert.AlertType.ERROR, "No room selected", ButtonType.OK).show();
@@ -80,7 +89,7 @@ public class EditShowTimeViewController {
     public void setShowTime(ShowTime pShowTime) {
         this.aCurrentShowTime = pShowTime;
         this.aDatePicker.setValue((pShowTime.getaDateTime().toLocalDate()));
-        this.aTimeTextField.setText(pShowTime.getaDateTime().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+        this.aTimeTextField.setText(pShowTime.getaDateTime().format(DateTimeFormatter.ofPattern("h:mm a", Locale.ENGLISH)));
         this.aRoomComboBox.getSelectionModel().select(Room.roomList.indexOf(this.aCurrentShowTime.getaRoom()));
     }
 }

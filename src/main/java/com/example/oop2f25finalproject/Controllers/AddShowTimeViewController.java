@@ -8,8 +8,11 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Controller for the "Add ShowTime" view.
@@ -72,7 +75,13 @@ public class AddShowTimeViewController {
                 ShowTime newShowTime = new ShowTime(null, Room.roomList.get(selectedIndex));
 
                 LocalDate date = aDatePicker.getValue();
-                newShowTime.setDateTime(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " " + aTimeTextField.getText());
+                LocalTime time = LocalTime.parse(
+                        aTimeTextField.getText(),
+                        DateTimeFormatter.ofPattern("h:mm a", Locale.ENGLISH)
+                );
+
+                LocalDateTime dateTime = LocalDateTime.of(date, time);
+                newShowTime.setDateTime(dateTime);
 
                 if (aCurrentMovie != null) {
                     aCurrentMovie.addShowTime(newShowTime);
@@ -87,6 +96,7 @@ public class AddShowTimeViewController {
             }
         }
         catch (Exception e) {
+            e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK).showAndWait();
         }
     }

@@ -17,6 +17,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Optional;
 
 /**
  * Controller responsible for managing the movie list within the manager interface.
@@ -175,8 +176,12 @@ public class MovieManagementViewController {
             new Alert(Alert.AlertType.ERROR, "No movie selected", ButtonType.OK).showAndWait();
         }
         else {
-            Movie.removeMovie(selectedIndex);
-            this.refreshMovies();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this Movie?", ButtonType.YES, ButtonType.NO);
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.YES) {
+                Movie.removeMovie(selectedIndex);
+                this.refreshMovies();
+            }
         }
     }
 
