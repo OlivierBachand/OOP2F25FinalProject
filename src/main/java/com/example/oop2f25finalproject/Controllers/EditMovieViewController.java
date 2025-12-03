@@ -15,6 +15,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
 /**
@@ -79,7 +81,10 @@ public class EditMovieViewController {
             this.onCancelButtonClick();
         }
         catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK).showAndWait();
+            if (e instanceof ParseException)
+                new Alert(Alert.AlertType.ERROR, "Invalid Length", ButtonType.OK).showAndWait();
+            else
+                new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK).showAndWait();
         }
     }
 

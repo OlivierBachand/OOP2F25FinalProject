@@ -69,7 +69,7 @@ public class EditShowTimeViewController {
             }
         }
         catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK).showAndWait();
+            new Alert(Alert.AlertType.ERROR, "Invalid date and/or time.", ButtonType.OK).showAndWait();
         }
     }
 

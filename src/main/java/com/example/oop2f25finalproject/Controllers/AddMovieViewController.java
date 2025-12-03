@@ -16,6 +16,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -52,6 +54,7 @@ public class AddMovieViewController {
     /** Temporary list holding the ShowTime objects before the movie is officially created. */
     private final List<ShowTime> aShowTimesList = new ArrayList<>();
 
+    @FXML
     private Button aEditButton;
 
     /**
@@ -84,7 +87,10 @@ public class AddMovieViewController {
             this.onCancelButtonClick();
         }
         catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK).showAndWait();
+            if (e instanceof ParseException)
+                new Alert(Alert.AlertType.ERROR, "Invalid Length", ButtonType.OK).showAndWait();
+            else
+                new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK).showAndWait();
         }
     }
 
