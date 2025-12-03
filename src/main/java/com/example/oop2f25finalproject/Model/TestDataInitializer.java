@@ -3,6 +3,7 @@ package com.example.oop2f25finalproject.Model;
 import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Random; // New import
 
 /**
  * Initializes test data for the movie theatre application.
@@ -22,6 +23,7 @@ public class TestDataInitializer {
         try {
             createRooms();
             createMoviesAndShowtimes();
+            createSampleSales(); // FIX: Call to create sample tickets
             System.out.println("Test data initialization complete!");
             System.out.println("- Rooms created: " + Room.roomList.size());
             System.out.println("- Movies created: " + Movie.movieList.size());
@@ -99,5 +101,35 @@ public class TestDataInitializer {
         LocalDateTime dateTime = LocalDateTime.parse(dateTimeStr, formatter);
         Room room = Room.roomList.get(roomIndex);
         return new ShowTime(dateTime, room);
+    }
+
+    /**
+     * SAMPLE
+     * Creates sample tickets for various showtimes to simulate sales.
+     * This provides data for the manager's ticket sales views.
+     */
+    private static void createSampleSales() {
+        Random rand = new Random();
+        int totalTickets = 0;
+        int dummyClientId = 1; // Required by Ticket constructor
+        double dummyTicketPrice = 12.50; // Required by Ticket constructor
+
+        // Iterate through all movies and their showtimes
+        for (Movie movie : Movie.movieList) {
+            for (int i = 0; i < movie.getShowTimesSize(); i++) {
+                ShowTime showTime = movie.getShowTime(i);
+
+                // Determine a random number of tickets sold for this showtime (5 to 50)
+                int ticketsToSell = 5 + rand.nextInt(46);
+                totalTickets += ticketsToSell;
+
+                // Simulate creating and adding tickets to the showtime
+                for (int j = 0; j < ticketsToSell; j++) {
+                    // Correctly instantiates Ticket with all required parameters
+                    showTime.addTicket(new Ticket(dummyClientId, showTime, dummyTicketPrice));
+                }
+            }
+        }
+        System.out.println("Created " + totalTickets + " sample ticket sales.");
     }
 }
