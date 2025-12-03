@@ -12,18 +12,26 @@ import java.util.List;
 
 public class Login {
 
+    private static Login instance;
+
     private final Manager manager; // single fixed manager
     private final List<Client> clients; // dynamic list of clients
 
     /**
      * Initializes the login model with a fixed manager and empty client list.
      */
-    public Login() {
+    private Login() {
         // manager credentials
         manager = new Manager("Admin", "admin@gmt.com", "admin123");
         clients = new ArrayList<>();
     }
 
+    public static Login getInstance() {
+        if (instance == null) {
+            instance = new Login();
+        }
+        return instance;
+    }
     /**
      * Registers a new client
      *

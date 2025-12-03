@@ -45,23 +45,6 @@ public class LoginController {
      */
     private Login aLogin;
 
-//    /**
-//     * Default constructor.
-//     * The shared login instance must be set using {@link #setLogin(Login)}.
-//     */
-//    public LoginController() {
-//
-//    }
-
-    /**
-     * Sets the shared Login instance for authentication and registration.
-     *
-     * @param pLogin The shared Login model
-     */
-    public void setLogin(Login pLogin) {
-        this.aLogin = pLogin;
-    }
-
     /**
      * Initializes the controller.
      * Clears all input fields and the error message label when the scene loads.
@@ -71,6 +54,8 @@ public class LoginController {
         errorMessageLabel.setText("");
         emailTextField.setText("");
         passwordTextField.setText("");
+
+        this.aLogin = Login.getInstance();
     }
 
     /**
@@ -84,42 +69,6 @@ public class LoginController {
     public void onLoginButtonClick() {
         String email = emailTextField.getText().trim();
         String password = passwordTextField.getText();
-
-//        try {
-//
-//            // Authenticate using the login model
-//            User loggedInUser = aLogin.authenticate(email, password);
-//
-//            Stage stage = (Stage) loginButton.getScene().getWindow();
-//            FXMLLoader fxmlLoader;
-//
-//            if (loggedInUser instanceof Manager) {
-//                fxmlLoader = new FXMLLoader(MovieTheatreApplication.class.getResource("/com/example/oop2f25finalproject/manager-view.fxml"));
-//            } else {
-//                fxmlLoader = new FXMLLoader(MovieTheatreApplication.class.getResource("/com/example/oop2f25finalproject/client-view.fxml"));
-//            }
-//
-//            Parent root = fxmlLoader.load();
-//            Scene scene = new Scene(root);
-//            stage.setScene(scene);
-//            stage.setTitle("Dashboard");
-//            stage.show();
-//
-//        } catch (IllegalArgumentException e) {
-//            errorMessageLabel.setText(e.getMessage());
-//        } catch (IOException e) {
-//            errorMessageLabel.setText("Failed to load the dashboard. Please refresh the page.");
-//        }
-
-//        // Validate empty input
-//        if (email.isEmpty()) {
-//            errorMessageLabel.setText("Email cannot be empty");
-//            return;
-//        }
-//        if (password.isEmpty()) {
-//            errorMessageLabel.setText("Password cannot be empty");
-//            return;
-//        }
 
         try {
             // Authenticate using the Login model
@@ -166,8 +115,6 @@ public class LoginController {
             Parent root = fxmlLoader.load();
 
             SignupController signupController = fxmlLoader.getController();
-            signupController.setLogin(aLogin);
-
             Stage stage = (Stage) createAccountButton.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
