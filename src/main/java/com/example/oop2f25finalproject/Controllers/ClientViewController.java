@@ -1,5 +1,6 @@
 package com.example.oop2f25finalproject.Controllers;
 
+import com.example.oop2f25finalproject.Model.Login;
 import com.example.oop2f25finalproject.Model.Movie;
 import com.example.oop2f25finalproject.Model.ShowTime;
 import com.example.oop2f25finalproject.MovieTheatreApplication;
@@ -221,7 +222,8 @@ public class ClientViewController {
     private void onClientLogOutButton(ActionEvent pEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MovieTheatreApplication.class.getResource("login-view.fxml"));
         Parent view = fxmlLoader.load();
-
+        LoginController controller = fxmlLoader.getController();
+        controller.setLogin(new Login());
         Scene nextScene = new Scene(view, 475, 475);
         Stage nextStage = new Stage();
         nextStage.setScene(nextScene);
