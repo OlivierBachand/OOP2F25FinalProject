@@ -3,7 +3,6 @@ package com.example.oop2f25finalproject.Controllers;
 
 import com.example.oop2f25finalproject.Model.Movie;
 import com.example.oop2f25finalproject.Model.ShowTime;
-import com.example.oop2f25finalproject.Model.Ticket;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,8 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Controller for displaying ticket sales grouped by movie.

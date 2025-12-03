@@ -1,6 +1,5 @@
 package com.example.oop2f25finalproject.Controllers;
 
-import com.example.oop2f25finalproject.Model.Login;
 import com.example.oop2f25finalproject.Model.Movie;
 import com.example.oop2f25finalproject.Model.ShowTime;
 import com.example.oop2f25finalproject.MovieTheatreApplication;

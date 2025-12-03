@@ -10,8 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-
-import java.time.format.DateTimeFormatter; // Required Import
+import java.time.format.DateTimeFormatter;
 
 /**
  * Controller for displaying ticket sales grouped by showtime.
@@ -43,7 +42,7 @@ public class TicketSoldByShowTimeController {
     private void loadTicketSalesData() {
         ObservableList<String> salesData = FXCollections.observableArrayList();
 
-        // Define the formatter ONCE outside the loop for efficiency
+        // Define the formatter once outside the loop
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm a");
 
         // Iterate through all movies
@@ -53,10 +52,10 @@ public class TicketSoldByShowTimeController {
                 ShowTime showTime = movie.getShowTime(i);
                 int ticketsSold = showTime.getTickets().size();
 
-                // Format the date/time using the reusable formatter object
+                // Format the dateTime using formatter object
                 String dateTimeOnly = showTime.getaDateTime().format(formatter);
 
-                // Format the output string
+                // Format
                 String displayText = String.format("%-60s\t\t%d", dateTimeOnly, ticketsSold);
 
                 salesData.add(displayText);

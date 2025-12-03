@@ -3,9 +3,7 @@ package com.example.oop2f25finalproject.Model;
 /**
  * Represents a user in the movie ticket booking system.
  * This is an abstract base class for different types of users (Client, Manager).
- *
- * The User class is part of a disjoint specialization hierarchy, meaning
- * a user can be either a Client or a Manager, but not both.
+ * The User class serves as a common structure for all users in the system.
  *
  * @author Shanley Aninzo
  */
@@ -18,8 +16,9 @@ public abstract class User {
     private final String aPassword;
 
     /**
-    * Creates a new User with the specified credentials.
-    * Performs validation on all parameters.
+     * This constructor validates that the name is not null or empty,
+     * the email follows a valid format, and the password has at least 6 characters.
+     * </p>
     *
     * @param pName The user's name (must not be null or empty)
     * @param pEmail The user's email address (must be a valid format)

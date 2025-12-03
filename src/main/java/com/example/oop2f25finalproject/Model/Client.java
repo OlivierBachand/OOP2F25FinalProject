@@ -3,7 +3,6 @@ package com.example.oop2f25finalproject.Model;
 /**
  * Represents a client in the movie ticket booking system.
  * A Client is a specialized type of User who can book tickets.
- *
  * This class extends User and adds client-specific functionality,
  * including a unique client identifier used for ticket bookings.
  *
