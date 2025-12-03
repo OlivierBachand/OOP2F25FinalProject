@@ -68,6 +68,7 @@ public class MovieManagementViewController {
         Platform.exit();
     }
 
+    /** Button to edit selected movie. */
     @FXML
     private Button aEditButton;
 

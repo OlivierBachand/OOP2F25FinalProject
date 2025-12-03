@@ -49,6 +49,7 @@ public class EditMovieViewController {
     @FXML
     private Movie aMovie;
 
+    /** Button to edit selected showtime. */
     @FXML
     private Button aEditButton;
 

@@ -17,48 +17,78 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 /**
- * Controller responsible for creating a new {@link Movie} and managing its associated data.
+ * Controller for the "Add Movie" view.
+ *
  * <p>
- * This view allows the user to input basic movie information (title, genre, and length),
- * as well as add, edit, or remove showtimes before finalizing and saving the movie.
+ * This controller manages the creation of a new {@link Movie}, including
+ * user-entered details such as the movie’s title, genre, length, and
+ * associated {@link ShowTime} objects.
  * </p>
+ *
+ * <p>
+ * Users may add, edit, or delete showtimes before finalizing the creation of
+ * the movie. All showtimes remain stored in a temporary list until the movie
+ * is successfully created. If the user cancels the process, no data is saved.
+ * </p>
+ *
+ * <p>
+ * Responsibilities include:
+ * </p>
+ * <ul>
+ *     <li>Collecting and validating basic movie information</li>
+ *     <li>Managing temporary showtime data</li>
+ *     <li>Opening modal windows for adding/editing showtimes</li>
+ *     <li>Providing feedback through alerts for errors or confirmations</li>
+ * </ul>
  */
 public class AddMovieViewController {
 
-    /** Text field used to enter the movie's title. */
+    /** Text field used to enter the movie’s title. */
     @FXML
     private TextField aTitleTextField;
 
-    /** Text field used to enter the movie's genre. */
+    /** Text field used to enter the movie’s genre. */
     @FXML
     private TextField aGenreTextField;
 
-    /** Text field used to enter the movie's length in HH:mm:ss format. */
+    /**
+     * Text field used to enter the movie’s length.
+     * Expected format: HH:mm:ss.
+     */
     @FXML
     private TextField aLengthTextField;
 
-    /** ListView that displays all added showtimes as formatted strings. */
+    /**
+     * ListView displaying all added showtimes in string format.
+     */
     @FXML
     private ListView<String> aShowTimeListView;
 
-    /** Observable list containing string representations of the showtimes for display. */
+    /**
+     * Observable list of formatted showtime strings.
+     * Backed by {@link #aShowTimesList}.
+     */
     @FXML
     private ObservableList<String> aShowTimes = FXCollections.observableArrayList();
 
-    /** Temporary list holding the ShowTime objects before the movie is officially created. */
+    /**
+     * Internal list containing the actual {@link ShowTime} objects.
+     * Modified when adding, editing, or deleting showtimes.
+     */
     private final List<ShowTime> aShowTimesList = new ArrayList<>();
 
+    /** Reference to the Edit button, used for double-click editing. */
     @FXML
     private Button aEditButton;
 
     /**
-     * Closes the "Add Movie" window without saving changes.
+     * Closes the "Add Movie" window without saving any entered data.
+     * Triggered when the Cancel button is clicked.
      */
     @FXML
     private void onCancelButtonClick() {
@@ -66,10 +96,11 @@ public class AddMovieViewController {
     }
 
     /**
-     * Creates a new {@link Movie} object using the input fields and the collected showtimes.
+     * Attempts to create a new {@link Movie} using the entered data and collected showtimes.
+     *
      * <p>
-     * If the provided information is invalid, an error alert is shown.
-     * On success, the window is closed.
+     * If validation fails (for example, invalid length format), an appropriate
+     * error alert is shown. On successful creation, the window closes.
      * </p>
      */
     @FXML
@@ -84,6 +115,7 @@ public class AddMovieViewController {
             for (ShowTime showTime : aShowTimesList) {
                 newMovie.addShowTime(showTime);
             }
+
             this.onCancelButtonClick();
         }
         catch (Exception e) {
@@ -96,14 +128,16 @@ public class AddMovieViewController {
 
     /**
      * Deletes the currently selected showtime from the temporary list.
+     *
      * <p>
-     * Prompts the user for confirmation before removing the showtime.
-     * If no showtime is selected, an error alert is displayed.
+     * A confirmation dialog is shown before deletion. If no showtime is selected,
+     * an error alert is displayed.
      * </p>
      */
     @FXML
     private void onDeleteButtonClick() {
         int selectedIndex = this.aShowTimeListView.getSelectionModel().getSelectedIndex();
+
         if (selectedIndex != -1) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
                     "Are you sure you want to delete this ShowTime?",
@@ -122,14 +156,15 @@ public class AddMovieViewController {
     }
 
     /**
-     * Opens the "Edit ShowTime" window for the selected showtime.
+     * Opens a modal window for editing the selected {@link ShowTime}.
+     *
      * <p>
-     * The selected ShowTime is passed to the edit controller. After the modal window is closed,
-     * the displayed list is refreshed. If no showtime is selected, an error alert is shown.
+     * The selected showtime is passed to the edit controller. After the modal window closes,
+     * the displayed showtime list is refreshed.
      * </p>
      *
-     * @param pEvent the UI event originating from clicking the Edit button
-     * @throws IOException if the FXML resource cannot be loaded
+     * @param pEvent the UI event triggering this action
+     * @throws IOException if the FXML file cannot be loaded
      */
     @FXML
     private void onEditButtonClick(ActionEvent pEvent) throws IOException {
@@ -139,37 +174,45 @@ public class AddMovieViewController {
             FXMLLoader fxmlLoader = new FXMLLoader(MovieTheatreApplication.class.getResource("edit-show-time-view.fxml"));
             Parent view = fxmlLoader.load();
             EditShowTimeViewController newView = fxmlLoader.getController();
+
             Scene nextScene = new Scene(view, 286, 266);
             Stage nextStage = new Stage();
+
             newView.setShowTime(this.aShowTimesList.get(selectedIndex));
+
             nextStage.setScene(nextScene);
             nextStage.setTitle("Edit ShowTime");
             nextStage.initModality(Modality.WINDOW_MODAL);
             nextStage.initOwner(((Node) pEvent.getSource()).getScene().getWindow());
             nextStage.setResizable(false);
             nextStage.showAndWait();
+
             this.refreshShowTimes();
         }
     }
 
     /**
-     * Opens the "Add ShowTime" window, allowing the user to create a new ShowTime.
+     * Opens a modal window for creating a new {@link ShowTime}.
+     *
      * <p>
-     * The newly created showtime is added to the internal temporary list.
-     * After the modal window closes, the ShowTime ListView is refreshed.
+     * After the modal window closes, the new showtime is added to the internal list,
+     * and the ListView is refreshed.
      * </p>
      *
-     * @param pEvent the user action that triggered this method
-     * @throws IOException if the FXML file cannot be loaded
+     * @param pEvent the UI event triggering this action
+     * @throws IOException if the FXML resource cannot be loaded
      */
     @FXML
     private void onAddShowTimeButtonClick(ActionEvent pEvent) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MovieTheatreApplication.class.getResource("add-show-time-view.fxml"));
         Parent view = fxmlLoader.load();
         AddShowTimeViewController newView = fxmlLoader.getController();
+
         Scene nextScene = new Scene(view, 286, 266);
         Stage nextStage = new Stage();
+
         newView.setShowTimesList(this.aShowTimesList);
+
         nextStage.setScene(nextScene);
         nextStage.setTitle("New ShowTime");
         nextStage.initModality(Modality.WINDOW_MODAL);
@@ -181,12 +224,19 @@ public class AddMovieViewController {
     }
 
     /**
-     * Initializes the view by connecting the ListView to the observable list
-     * containing the formatted showtime strings.
+     * Initializes the controller after the FXML is loaded.
+     *
+     * <p>
+     * This method:
+     * </p>
+     * <ul>
+     *     <li>Binds the ListView to the observable showtime list</li>
+     *     <li>Enables double-click editing by firing the Edit button</li>
+     * </ul>
      */
     public void initialize() {
         aShowTimeListView.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2) { // double click
+            if (event.getClickCount() == 2) {
                 aEditButton.fire();
             }
         });
@@ -194,10 +244,11 @@ public class AddMovieViewController {
     }
 
     /**
-     * Refreshes the displayed list of showtimes.
+     * Refreshes the ListView to reflect the current list of showtimes.
+     *
      * <p>
-     * This method clears and repopulates the observable list based on the
-     * internal list of ShowTime objects.
+     * Clears and repopulates the observable list using the string
+     * representation of each {@link ShowTime}.
      * </p>
      */
     private void refreshShowTimes() {

@@ -161,11 +161,9 @@ public class ManagerViewController {
      * <p>
      * This uses {@link Platform#exit()} to shut down the JavaFX runtime.
      * </p>
-     *
-     * @param pEvent the action event triggered by the close button
      */
     @FXML
-    private void onCloseButtonClick(ActionEvent pEvent) {
+    private void onCloseButtonClick() {
         Platform.exit();
     }
 }

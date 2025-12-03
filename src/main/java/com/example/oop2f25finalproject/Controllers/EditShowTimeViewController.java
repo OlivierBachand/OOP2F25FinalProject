@@ -27,6 +27,7 @@ public class EditShowTimeViewController {
     @FXML
     private ComboBox<String> aRoomComboBox;
 
+    /** The showtime that is being edited */
     private ShowTime aCurrentShowTime;
 
     /**
