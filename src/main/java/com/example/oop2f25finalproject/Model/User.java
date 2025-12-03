@@ -9,7 +9,7 @@ package com.example.oop2f25finalproject.Model;
  *
  * @author Shanley Aninzo
  */
-public class User {
+public abstract class User {
     /** The user's name */
     private final String aName;
     /** The user's email address */
@@ -18,25 +18,18 @@ public class User {
     private final String aPassword;
 
     /**
-     * Creates a new User with the specified credentials.
-     *
-     * @param pName The user's name (must not be null or empty)
-     * @param pEmail The user's email address (must be valid format)
-     * @param pPassword The user's password (must be at least 6 characters)
-     * @throws IllegalArgumentException if any parameter is invalid
-     */
+    * Creates a new User with the specified credentials.
+    * Performs validation on all parameters.
+    *
+    * @param pName The user's name (must not be null or empty)
+    * @param pEmail The user's email address (must be a valid format)
+    * @param pPassword The user's password (must be at least 6 characters)
+    * @throws IllegalArgumentException if any parameter is invalid
+    */
     public User(String pName, String pEmail, String pPassword) {
-        if (pName == null || pName.trim().isEmpty()) {
-            throw new IllegalArgumentException("Name cannot be null or empty");
-        }
-
-        if (!isValidEmail(pEmail)) {
-            throw new IllegalArgumentException("Invalid email address");
-        }
-
-        if (pPassword == null || pPassword.length() <6) {
-            throw new IllegalArgumentException("Password must be at least 6 characters long");
-        }
+        validateName(pName);
+        validateEmail(pEmail);
+        validatePassword(pPassword);
 
         this.aName = pName;
         this.aEmail = pEmail;
@@ -44,15 +37,43 @@ public class User {
     }
 
     /**
-     * Validates email format using regex pattern.
-     * Ensures email contains @ symbol and valid domain structure.
+     * Validates that a name is not null or empty.
+     *
+     * @param pName The name to validate
+     * @throws IllegalArgumentException if the name is null or empty
+     */
+    public static void validateName(String pName) {
+        if (pName == null || pName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Name cannot be null or empty");
+        }
+    }
+
+    /**
+     * Validates that an email is not null, not empty, and follows a valid email pattern.
      *
      * @param pEmail The email to validate
-     * @return true if email format is valid, false otherwise
+     * @throws IllegalArgumentException if the email is null, empty, or invalid
      */
-    private boolean isValidEmail(String pEmail) {
+    public static void validateEmail(String pEmail) {
         String validEmail = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
-        return pEmail != null && pEmail.matches(validEmail);
+        if (pEmail == null || pEmail.trim().isEmpty()) {
+            throw new IllegalArgumentException("Email cannot be null or empty");
+        }
+        if (!pEmail.matches(validEmail)) {
+            throw new IllegalArgumentException("Invalid email address");
+        }
+    }
+
+    /**
+     * Validates that a password is not null and has at least 6 characters.
+     *
+     * @param pPassword The password to validate
+     * @throws IllegalArgumentException if the password is null or less than 6 characters
+     */
+    public static void validatePassword(String pPassword) {
+        if (pPassword == null || pPassword.length() <6) {
+            throw new IllegalArgumentException("Password must be at least 6 characters long");
+        }
     }
 
     /**
