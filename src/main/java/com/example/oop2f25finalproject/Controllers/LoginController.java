@@ -82,25 +82,14 @@ public class LoginController {
      */
     @FXML
     public void onLoginButtonClick() {
-        String email = emailTextField.getText().trim();
-        String password = passwordTextField.getText();
-
-        // Validate input
-        if(email.isEmpty() || password.isEmpty()) {
-            errorMessageLabel.setText("Email and Password cannot be empty");
-            return;
-        }
-
-        // Authenticate using the login model
-        User loggedInUser = aLogin.authenticate(email, password);
-
-        if (loggedInUser == null) {
-            errorMessageLabel.setText("Invalid email or password");
-            return;
-        }
-
         try {
-            // Redirect based on the role (Manager or client)
+
+            String email = emailTextField.getText().trim();
+            String password = passwordTextField.getText();
+
+            // Authenticate using the login model
+            User loggedInUser = aLogin.authenticate(email, password);
+
             Stage stage = (Stage) loginButton.getScene().getWindow();
             FXMLLoader fxmlLoader;
 
@@ -116,8 +105,10 @@ public class LoginController {
             stage.setTitle("Dashboard");
             stage.show();
 
+        } catch (IllegalArgumentException e) {
+            errorMessageLabel.setText(e.getMessage());
         } catch (IOException e) {
-            errorMessageLabel.setText("Failed to load Dashboard. Please refresh the page.");
+            errorMessageLabel.setText("Failed to load the dashboard. Please refresh the page.");
         }
     }
 
