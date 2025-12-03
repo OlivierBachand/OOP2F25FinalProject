@@ -45,21 +45,21 @@ public class LoginController {
      */
     private Login aLogin;
 
-    /**
-     * Default constructor.
-     * The shared login instance must be set using {@link #setLogin(Login)}.
-     */
-    public LoginController() {
-
-    }
+//    /**
+//     * Default constructor.
+//     * The shared login instance must be set using {@link #setLogin(Login)}.
+//     */
+//    public LoginController() {
+//
+//    }
 
     /**
      * Sets the shared Login instance for authentication and registration.
      *
-     * @param aLogin The shared Login model
+     * @param pLogin The shared Login model
      */
-    public void setLogin(Login aLogin) {
-        this.aLogin = aLogin;
+    public void setLogin(Login pLogin) {
+        this.aLogin = pLogin;
     }
 
     /**
@@ -82,17 +82,57 @@ public class LoginController {
      */
     @FXML
     public void onLoginButtonClick() {
+        String email = emailTextField.getText().trim();
+        String password = passwordTextField.getText();
+
+//        try {
+//
+//            // Authenticate using the login model
+//            User loggedInUser = aLogin.authenticate(email, password);
+//
+//            Stage stage = (Stage) loginButton.getScene().getWindow();
+//            FXMLLoader fxmlLoader;
+//
+//            if (loggedInUser instanceof Manager) {
+//                fxmlLoader = new FXMLLoader(MovieTheatreApplication.class.getResource("/com/example/oop2f25finalproject/manager-view.fxml"));
+//            } else {
+//                fxmlLoader = new FXMLLoader(MovieTheatreApplication.class.getResource("/com/example/oop2f25finalproject/client-view.fxml"));
+//            }
+//
+//            Parent root = fxmlLoader.load();
+//            Scene scene = new Scene(root);
+//            stage.setScene(scene);
+//            stage.setTitle("Dashboard");
+//            stage.show();
+//
+//        } catch (IllegalArgumentException e) {
+//            errorMessageLabel.setText(e.getMessage());
+//        } catch (IOException e) {
+//            errorMessageLabel.setText("Failed to load the dashboard. Please refresh the page.");
+//        }
+
+//        // Validate empty input
+//        if (email.isEmpty()) {
+//            errorMessageLabel.setText("Email cannot be empty");
+//            return;
+//        }
+//        if (password.isEmpty()) {
+//            errorMessageLabel.setText("Password cannot be empty");
+//            return;
+//        }
+
         try {
-
-            String email = emailTextField.getText().trim();
-            String password = passwordTextField.getText();
-
-            // Authenticate using the login model
+            // Authenticate using the Login model
             User loggedInUser = aLogin.authenticate(email, password);
 
+            if (loggedInUser == null) {
+                errorMessageLabel.setText("Invalid email or password");
+                return;
+            }
+
+            // Load appropriate dashboard
             Stage stage = (Stage) loginButton.getScene().getWindow();
             FXMLLoader fxmlLoader;
-
             if (loggedInUser instanceof Manager) {
                 fxmlLoader = new FXMLLoader(MovieTheatreApplication.class.getResource("/com/example/oop2f25finalproject/manager-view.fxml"));
             } else {
@@ -106,10 +146,12 @@ public class LoginController {
             stage.show();
 
         } catch (IllegalArgumentException e) {
+            // Show validation errors from User constructor
             errorMessageLabel.setText(e.getMessage());
         } catch (IOException e) {
             errorMessageLabel.setText("Failed to load the dashboard. Please refresh the page.");
         }
+
     }
 
     /**
