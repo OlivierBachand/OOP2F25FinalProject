@@ -47,14 +47,13 @@ public class MovieDetailsController {
      *
      * @param pMovie the movie to display
      * @param pShowTime the showtime containing date/time and room information
-     * @param pTicket the ticket containing pricing information
      */
-    public void setMovieDetails(Movie pMovie, ShowTime pShowTime, Ticket pTicket) {
+    public void setMovieDetails(Movie pMovie, ShowTime pShowTime) {
         aTitleDetailLabel.setText(pMovie.getTitle());
         aGenreDetailLabel.setText(pMovie.getaGenre());
         aShowtimeDetailLabel.setText(pShowTime.toString());
         aRoomDetailLabel.setText(pShowTime.getaRoom().getName());
-        aTicketPriceDetailLabel.setText(String.format("$%.2f", pTicket.getaPrice()));
+        aTicketPriceDetailLabel.setText("Check at counter");
     }
 
     /**
