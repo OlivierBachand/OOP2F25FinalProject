@@ -128,30 +128,30 @@ public class RoomManagementViewController {
     public void onEditButtonClick(ActionEvent actionEvent) throws IOException {
         int selectedIndex = aRoomListView.getSelectionModel().getSelectedIndex();
 
-        if (selectedIndex != -1) {
-            FXMLLoader fxmlLoader = new FXMLLoader(
-                    MovieTheatreApplication.class.getResource("edit-room-view.fxml")
-            );
-            Parent view = fxmlLoader.load();
+        // 1. Load FXML
+        FXMLLoader loader = new FXMLLoader(
+                MovieTheatreApplication.class.getResource("edit-room-view.fxml")
+        );
+        Parent root = loader.load();
 
-            // Get the selected room from the model
-            Room selectedRoom = Room.getRoom(selectedIndex);
+        // 2. Get controller
+        EditRoomController controller = loader.getController();
 
-            Scene nextScene = new Scene(view, 475, 475);
-            Stage nextStage = new Stage();
-            nextStage.setScene(nextScene);
-            nextStage.setTitle("Edit Room: " + selectedRoom.getName());
-            nextStage.initModality(Modality.WINDOW_MODAL);
-            nextStage.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());
-            nextStage.setResizable(false);
-            nextStage.showAndWait();
+        // 3. Pass selected room
+        Room selectedRoom = Room.getRoom(selectedIndex);
+        controller.setRoomToEdit(selectedRoom);
 
-            // Refresh the list to show any changes
-            refreshRooms();
-        } else {
-            // Show error if no room is selected
-            new Alert(Alert.AlertType.ERROR, "No room selected", ButtonType.OK).showAndWait();
-        }
+        // 4. Show the window
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root, 475, 475));
+        stage.setTitle("Edit Room: " + selectedRoom.getName());
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());
+        stage.setResizable(false);
+        stage.showAndWait();
+
+        // 5. Refresh after saving
+        refreshRooms();
     }
 
     /**
@@ -176,4 +176,3 @@ public class RoomManagementViewController {
         }
     }
 }
-
