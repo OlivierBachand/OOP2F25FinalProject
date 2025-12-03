@@ -142,7 +142,7 @@ public class MovieManagementViewController {
     private void onEditButtonClick(ActionEvent pEvent) throws IOException {
         int selectedIndex = aMoviesListView.getSelectionModel().getSelectedIndex();
         if (selectedIndex != -1) {
-            FXMLLoader fxmlLoader = new FXMLLoader(MovieTheatreApplication.class.getResource("../../../../../../../../../class Backups/edit-movie-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MovieTheatreApplication.class.getResource("edit-movie-view.fxml"));
             Parent view = fxmlLoader.load();
             EditMovieViewController newView = fxmlLoader.getController();
             Scene nextScene = new Scene(view, 475, 475);
@@ -195,7 +195,7 @@ public class MovieManagementViewController {
      */
     @FXML
     private void onAddButtonClick(ActionEvent pEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MovieTheatreApplication.class.getResource("../../../../../../../../../class Backups/add-movie-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MovieTheatreApplication.class.getResource("add-movie-view.fxml"));
         Parent view = fxmlLoader.load();
         AddMovieViewController newView = fxmlLoader.getController();
         Scene nextScene = new Scene(view, 475, 475);
@@ -203,7 +203,6 @@ public class MovieManagementViewController {
         nextStage.setScene(nextScene);
         nextStage.setTitle("Add Movie");
         nextStage.initModality(Modality.WINDOW_MODAL);
-        nextStage.initOwner(((Node) pEvent.getSource()).getScene().getWindow());
         nextStage.setResizable(false);
         nextStage.showAndWait();
         this.refreshMovies();

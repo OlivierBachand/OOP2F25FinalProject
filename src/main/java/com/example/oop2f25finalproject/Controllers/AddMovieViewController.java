@@ -131,7 +131,7 @@ public class AddMovieViewController {
         int selectedIndex = this.aShowTimeListView.getSelectionModel().getSelectedIndex();
 
         if (selectedIndex != -1) {
-            FXMLLoader fxmlLoader = new FXMLLoader(MovieTheatreApplication.class.getResource("../../../../../../../../../class Backups/edit-show-time-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MovieTheatreApplication.class.getResource("edit-show-time-view.fxml"));
             Parent view = fxmlLoader.load();
             EditShowTimeViewController newView = fxmlLoader.getController();
             Scene nextScene = new Scene(view, 475, 475);
@@ -162,7 +162,7 @@ public class AddMovieViewController {
      */
     @FXML
     private void onAddShowTimeButtonClick(ActionEvent pEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MovieTheatreApplication.class.getResource("../../../../../../../../../class Backups/add-show-time-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MovieTheatreApplication.class.getResource("add-show-time-view.fxml"));
         Parent view = fxmlLoader.load();
         AddShowTimeViewController newView = fxmlLoader.getController();
         Scene nextScene = new Scene(view, 475, 475);

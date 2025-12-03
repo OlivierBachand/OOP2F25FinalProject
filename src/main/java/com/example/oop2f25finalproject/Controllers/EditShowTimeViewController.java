@@ -61,6 +61,7 @@ public class EditShowTimeViewController {
 
                 LocalDateTime dateTime = LocalDateTime.of(date, time);
                 aCurrentShowTime.setDateTime(dateTime);
+                this.onCancelButtonClick();
             }
             else {
                 new Alert(Alert.AlertType.ERROR, "No room selected", ButtonType.OK).show();
